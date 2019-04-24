@@ -30,7 +30,8 @@ For software on your laptop you will require:
 1. Creating a Kubernetes Cluster on Oracle Cloud Infrastructure
     - Please note that if are using a instructor provided environment you might already have a cluster and you need to skip this step
     - If you want to create your own cluster you can create using the Quick create option. [Here](https://www.oracle.com/webfolder/technetwork/tutorials/obe/oci/oke-full/index.html) are the instructions
-
-2. Create Jenkin Instance in your kubernetes instances
-3. Create Mysql Server in you kubernetes instances
-4. Create your Jenkins pipelines
+2. Intial Setup - *please note the kubernetes cluster need to be up and running for this step*.
+3. [Create Jenkins Instance in your kubernetes cluster](./jenkins.pipelines.OKE3.md)
+4. Configure the Jenkins instance.
+5. Create Mysql Server in you kubernetes instances
+6. Create your Jenkins pipelines
