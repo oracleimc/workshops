@@ -1,7 +1,7 @@
 # DevOps: Deploying Microservices to OKE with Jenkins Pipelines (CI/CD) #
 
 **Step 2** - Assumption Initial Setup is complete.
-# Step 3 - Create Jenkins Instance in your kubernetes cluster
+# Step 3 - Create Jenkins Instance in your kubernetes cluster #
 In this lab, you are going to install, set up and configure Jenkins in your kubernetes clusters. To do this, we are going to use **Helm chats**. [Helm](https://helm.sh/) helps you manage your kubernetes applications.
 
 1. Install Helm. Instruction to install helm are [here](https://helm.sh/docs/using_helm/#installing-helm)
@@ -111,3 +111,7 @@ Here is the initial dashboard once you login.
 
 **Please note that you might have some updates to make for some of the plugins that were installed using the values descriptor file. They  might be out of date depending on when you do this lab** 
 
+---
+[Go back to Jenkins Pipelines Workshop Home page](README.md)
+
+[Next](jenkins.pipelines.OKE4.md)
