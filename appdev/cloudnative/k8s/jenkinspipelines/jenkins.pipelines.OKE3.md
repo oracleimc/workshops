@@ -1,6 +1,6 @@
 # DevOps: Deploying Microservices to OKE with Jenkins Pipelines (CI/CD) #
 
-**Step 2** - Assumption Initial Setup is complete.
+**Step 2** - Assumption [Initial Setup](jenkins.pipelines.OKE2) is complete.
 # Step 3 - Create Jenkins Instance in your kubernetes cluster #
 In this lab, you are going to install, set up and configure Jenkins in your kubernetes clusters. To do this, we are going to use **Helm chats**. [Helm](https://helm.sh/) helps you manage your kubernetes applications.
 

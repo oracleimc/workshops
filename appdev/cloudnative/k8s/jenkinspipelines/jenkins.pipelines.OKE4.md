@@ -50,6 +50,8 @@ ID - **ocir-credentials** *This ID is very important. You will need it in the of
 
 [Previous](jenkins.pipelines.OKE3.md)
 
+[Next](jenkins.pipelines.OKE5.md)
+
 
 
     
