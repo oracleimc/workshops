@@ -24,6 +24,10 @@ For software on your laptop you will require:
 + Github client - you can download [here](https://git-scm.com/downloads).
 + Visual Code (or IDE of your choice) - you can download [here](https://code.visualstudio.com/)
 
+GitHub imports
+
++ import https://github.com/allenkubai/people-service.git into your github account. Use the same name
++ import https://github.com/allenkubai/people-web-app.git into your github account. Use the same name
 
 ## Steps to follow ##
 
