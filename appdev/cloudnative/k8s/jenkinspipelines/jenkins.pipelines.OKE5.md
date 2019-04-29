@@ -10,13 +10,15 @@ In this lab, you are going to set up a mysql server instance in your kubernetes 
 + Create the mysql instance
 + Create the database in mysql
 
-1. The first thing is to clone the people-rest-service project on to your machine. people-rest-service project is the backend api. It's a Java Springboot rest api project, that writes data to mysql databasa. This api will be consume by a frontend app called people-web-app writen in ReactJS. To clone the project:
+1. The first thing is to clone the people-rest-service project on to your machine. people-rest-service project is the backend api. It's a Java Springboot rest api project, that writes data to mysql database. This api will be consume by a frontend app called people-web-app writen in ReactJS. To clone the project:
 
 ```
 cd oracle_projects
 
 git clone <url>
 ```
+
+**Please note that url is the people-rest-service you imported into you own git repo**
 
 Once the project has finished cloning, change into the directory:
 
@@ -28,7 +30,9 @@ cd people-rest-service
 
 ```
 kubectl create -f ./k8s/claims/mysql-volume-claim.yaml 
-
+```
+Output:
+```
 persistentvolumeclaim/mysqlclaim created
 ```
 
@@ -36,6 +40,10 @@ Please check if the volume was create by:
 
 ```
 kubectl get pvc
+```
+
+Output:
+```
 
 NAME           STATUS    VOLUME    CAPACITY   ACCESS MODES   STORAGECLASS   AGE
 jenkinsclaim   Bound     ocid1.volume.**   100Gi      RWO            oci            63m
@@ -54,6 +62,10 @@ secret/mysql-pass created
 
 ```
 kubectl create -f ./k8s/deployments/mysql-deployment.yaml 
+```
+
+Output:
+```
 deployment.extensions/mysql created
 service/mysql created
 ```
@@ -62,7 +74,10 @@ You can check if the pod is running:
 
 ```
 kubectl get pods
+```
 
+Output:
+```
 NAME                          READY     STATUS    RESTARTS   AGE
 cd-jenkins-74bbddd846-7k594   1/1       Running   0          140m
 mysql-69cfc89647-p42k7        1/1       Running   0          47s
@@ -72,7 +87,9 @@ You can check if the mysql service is running:
 
 ```
 kubectl get svc
-
+```
+Output:
+```
 NAME               TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)     AGE
 cd-jenkins         ClusterIP   10.96.186.250   <none>        8080/TCP    140m
 cd-jenkins-agent   ClusterIP   10.96.223.114   <none>        50000/TCP   140m
@@ -84,6 +101,9 @@ mysql              ClusterIP   10.96.136.57    <none>        3306/TCP    1m
 
 ```
 kubectl exec -it mysql-69cfc89647-p42k7 -- /bin/bash
+```
+Then:
+```
 
 root@mysql-69cfc89647-p42k7:/# mysql -u root -p
 Enter password: 
