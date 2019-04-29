@@ -18,6 +18,8 @@ For you to effectively work on this workshop, you will need to set up a couple o
 + **oci cli** - *Oracle Cloud Infrastructure Command Line tool. You will need this for you to download the kubeconfig file that is required by kubectl for it to connect to your cluster.*
 + **kubectl** - *Kubernetes commandline tool*
 
++ **Github Access Token** - Jenkins will need this to access you github repositories.
+
 Once this tools are installed and configured, you will now be able to download the **kubeconfig** file and use it to connect to your cluster.
 
 ## Install kubectl ##
@@ -154,6 +156,10 @@ NAME        STATUS    ROLES     AGE       VERSION
 10.0.11.2   Ready     node      1d        v1.12.7
 10.0.12.2   Ready     node      1d        v1.12.7
 ```
+
+## Github Access Token ##
+
+To get your access token, go [here](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line). Save it in a file somewhere you will need it later. 
 
 ### You are now ready to get started. ###
 
