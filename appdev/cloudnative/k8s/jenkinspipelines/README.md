@@ -40,4 +40,4 @@ GitHub imports
 5. [Create Mysql Server in the kubernetes cluster](jenkins.pipelines.OKE5.md)
 6. [Create a Shared Ingress for the kubernetes cluster](jenkins.pipelines.OKE6.md)
 7. [Deploy the people-service backend API using Jenkins Pipelines](jenkins.pipelines.OKE7.md)
-7. [Deploy the people-web-app frontend using Jenkins Pipelines]((jenkins.pipelines.OKE8.md))
+7. [Deploy the people-web-app frontend using Jenkins Pipelines](jenkins.pipelines.OKE8.md)
