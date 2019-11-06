@@ -1,7 +1,7 @@
 # DevOps: Deploying Microservices to OKE with Jenkins Pipelines (CI/CD) #
 
 **Step 1** - *Assumption* You have a Kubernetes Cluster.
-+ Git Client is installed
++ Git Client is installed including **Gitbash** - For windows users, this will give a unix command line. Download [here](https://git-scm.com/download/win)
 + You have installed your favorited IDE (I am using visual code just for the purposes of the workshop)
 
 **Installation of these two tools is out of scope of this workshop.** 
@@ -15,7 +15,6 @@ You have a Kubernetes Cluster
 
 For you to effectively work on this workshop, you will need to set up a couple of tools on your machine/laptop. This tools include:
 
-+ **Gitbash** - For windows users, this will give a unix command line. Download [here](https://git-scm.com/download/win)
 + **oci cli** - *Oracle Cloud Infrastructure Command Line tool. You will need this for you to download the kubeconfig file that is required by kubectl for it to connect to your cluster.*
 + **kubectl** - *Kubernetes commandline tool*
 
