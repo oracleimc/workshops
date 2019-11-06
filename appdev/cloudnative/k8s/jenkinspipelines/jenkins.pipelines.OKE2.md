@@ -15,6 +15,7 @@ You have a Kubernetes Cluster
 
 For you to effectively work on this workshop, you will need to set up a couple of tools on your machine/laptop. This tools include:
 
++ **Gitbash** - For windows users, this will give a unix command line. Download [here](https://git-scm.com/download/win)
 + **oci cli** - *Oracle Cloud Infrastructure Command Line tool. You will need this for you to download the kubeconfig file that is required by kubectl for it to connect to your cluster.*
 + **kubectl** - *Kubernetes commandline tool*
 
