@@ -16,7 +16,7 @@ In this lab, you are going to configure the jenkins instance. At the end of the 
 
 ![](./images/jenkins-adding-creds-1.png)
 
-2. On the next screen click on *Add Credentials*. The first credentials we are going to add is the kubeconfig file you downloaded in the initial setup step. Please input as shown in the screenshot below then click **OK**:
+2. On the next screen click on *Add Credentials*. The first credentials we are going to add is the OCI-config file you downloaded in the initial setup step. Please input as shown in the screenshot below then click **OK**:
 
 + Kind - **Secret file**
 + File - **Choose the config file from you machine**
