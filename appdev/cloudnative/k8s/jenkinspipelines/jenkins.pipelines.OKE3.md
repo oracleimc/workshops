@@ -66,7 +66,7 @@ jenkinsclaim   Bound     ocid1.**   100Gi      RWO            oci            66s
 execute the following command:
 
 ```
-helm install -n cd stable/jenkins -f ./oracle/oke/helm/jenkins/values.yaml --wait
+helm install cd-jenkins stable/jenkins -f ./oracle/oke/helm/jenkins/values.yaml --wait
 ```
 Once it's done installing you will see the output below with instructions on how to get jenkins admin password and to get access to jenkin via port forwarding:
 
