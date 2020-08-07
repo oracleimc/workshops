@@ -120,11 +120,11 @@ Let's get the public ip of our deploy service. Go to you pipeline execution and 
 
 ![](./images/people-service-pipeline-11.png)
 
-The Backend API is using a shared load balance, you need to check the ingress.yml file to confirm it's url path. The ingress file is located under k8s/services/ingress.yaml under the people-service. In my case it's *'/api'*. As shown in the image below.
+The Backend API is using a shared load balance, you need to check the ingress.yml file to confirm it's url path. The ingress file is located under k8s/services/ingress.yaml under the people-service. In my case it's *'/people'*. As shown in the image below.
 
 ![](./images/people-service-pipeline-12.png)
 
-Therefore my url will be ***http://< ip  >/api/< restendpoint >***. Input this a browser of you choice. 
+Therefore my url will be ***http://< ip  >/< restendpoint >***. Input this a browser of you choice. 
 
 ![](./images/people-service-pipeline-13.png)
 

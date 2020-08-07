@@ -109,6 +109,23 @@ Here is the initial dashboard once you login.
 
 ![](./images/jenkins_login_initial_dash.png)
 
+**PLEASE NOTE: that if your Jenkins instance logs you in AUTOMATICALLY then you have to configure security. WITHOUT security enabled on Jenkins, you won't be able to setup your pipelines.**
+
+**Jenkins Security**
+
+1. Click in Manage Jenkins > Configure Global Security
+
+![](./images/jenkins_security_setup_1.png)
+
+2. Go to Security Realm and select 'Jenkins' Own user database'. Then 'Save' and 'Apply'
+
+![](./images/jenkins_security_setup_2.png)
+
+3. The will take you to the 'Create First Admin User' page. Fill in the details and click 'Create First Admin User'. Then top right click 'log in'
+
+![](./images/jenkins_security_setup_3.png)
+
+Note the login is similar to steps shown above. 
 **Please note that you might have some updates to make for some of the plugins that were installed using the values descriptor file. They  might be out of date depending on when you do this lab** 
 
 ---

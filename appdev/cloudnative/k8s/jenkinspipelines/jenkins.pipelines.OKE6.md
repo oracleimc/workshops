@@ -3,8 +3,8 @@
 # Prerequisites
 Make sure you have completed the Initail Setup  [Step 2](jenkins.pipelines.OKE2.md).
 
-# Step 6 - Create a Shared Ingress for the kubernetes cluster #
-In this lab, you are going to set up an Ingress for the applications. Ingress allows external access to services within the Kubernetes cluster. In our case, our ingress will be a Load Balance that will be shared by the FrontEnd application and by the Backend application.
+# Step 6 - Create an Ingress Controller for the kubernetes cluster #
+In this lab, you are going to set up an Ingress for the applications. Ingress allows external access to services within the Kubernetes cluster. In our case, our we are going to create an nginx-ingress-controller which will be Load Balance that will be shared by the FrontEnd application and by the Backend application.
 
 + Create the Load Balancer
 + Verify the Load Balancer was created
@@ -19,70 +19,62 @@ Output:
 clusterrolebinding.rbac.authorization.k8s.io/my-cluster-admin-binding created
 ```
 
-2. For you to create the Load Balancer, I have provided a shell script that you can execute on you command like. The script is part of the kubernetes project you clone earlier. https://github.com/allenkubai/kubernetes/blob/master/oracle/oke/shared-ingress/create-ingress.sh
+2. For you to create the Ingress Controller, Run the following command
 
-To execute the script:
+```
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.30.0/deploy/static/mandatory.yaml
+
+```
+
+3. Next we are going to define our ingress-nginx ingress controller as a load balancer service: This file can be found under: https://github.com/allenkubai/kubernetes/tree/master/oracle/oke/shared-ingress/cloud-generic.yaml
+
+```
+kind: Service
+apiVersion: v1
+metadata:
+  name: ingress-nginx
+  namespace: ingress-nginx
+  labels:
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/part-of: ingress-nginx
+spec:
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/part-of: ingress-nginx
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+    - name: https
+      port: 443
+      targetPort: https
+```
+
+To apply the deployment:
 
 ```
 cd oracle_projects/kubernetes
 
-./oracle/oke/shared-ingress/create-ingress.sh
+kubectl apply -f ./oracle/oke/shared-ingress/cloud-generic.yaml
 
 ```
+For more information on how to create an Ingress controller on OKE go [here](https://docs.cloud.oracle.com/en-us/iaas/Content/ContEng/Tasks/contengsettingupingresscontroller.htm) 
+
+2. Check if the your ingress-nginx is up check the running services, using the command:
 
 ```
-#!/bin/sh
-export NAMESPACE=shared-ingress
-
-kubectl delete namespace $NAMESPACE --ignore-not-found=true --now=true
-
-# wait to delete resources
-sleep 60
-
-kubectl create namespace $NAMESPACE
-
-#wait to avoid issues with uncreated namespace
-sleep 10
-
-kubectl create sa oraclebmc-provisioner -n=$NAMESPACE
-  
-kubectl create -f https://raw.githubusercontent.com/nagypeter/kubernetes/master/ingress/rbac.yaml -n=$NAMESPACE
-  
-kubectl create -f https://raw.githubusercontent.com/nagypeter/kubernetes/master/ingress/nginx-default-backend-deployment.yaml -n=$NAMESPACE
-  
-kubectl create -f https://raw.githubusercontent.com/nagypeter/kubernetes/master/ingress/nginx-default-backend-service.yaml -n=$NAMESPACE
-  
-kubectl create -f https://raw.githubusercontent.com/nagypeter/kubernetes/master/ingress/nginx-config.yaml -n=$NAMESPACE
-  
-kubectl create -f https://raw.githubusercontent.com/nagypeter/kubernetes/master/ingress/nginx-ingress-controller-deployment.yaml -n=$NAMESPACE
-  
-kubectl create -f https://raw.githubusercontent.com/nagypeter/kubernetes/master/ingress/nginx-ingress-controller-service.yaml -n=$NAMESPACE
+kubectl get svc -n ingress-nginx
 ```
 
-**Please note you can execute the commands each at a time if you want.**
-
-
-Output:
+Result:
 
 ```
-namespace/shared-ingress created
-serviceaccount/oraclebmc-provisioner created
-clusterrole.rbac.authorization.k8s.io/nginx-ingress-clusterrole created
-role.rbac.authorization.k8s.io/nginx-ingress-role created
-rolebinding.rbac.authorization.k8s.io/nginx-ingress-role-nisa-binding created
-clusterrolebinding.rbac.authorization.k8s.io/nginx-ingress-clusterrole-nisa-binding created
-deployment.extensions/default-http-backend created
-service/default-http-backend created
-configmap/nginx-config created
-deployment.extensions/nginx-ingress-controller created
-service/nginx-ingress-controller created
-
+NAME            TYPE           CLUSTER-IP     EXTERNAL-IP         PORT(S)                       AGE
+ingress-nginx   LoadBalancer   10.96.13.245   130.61.198.159      80:30756/TCP,443:30118/TCP    1h
 ```
-For more information on how to create loadbalance on OKE go [here](https://github.com/nagypeter/kubernetes/tree/master/ingress) or [here](https://github.com/CloudTestDrive/EventLabs/blob/master/AppDev/K8S/loadbalance.md)
 
-2. Check if the your Load balancer is up, login to your kubernetes console to see if the pods are up.
-
-![](./images/kube-ingress-1.png)
+*if you see Pending under EXTERNAL-IP, just repeat the command*
 
 3. Now check if you can see you load balancer on your OCI console.
 
