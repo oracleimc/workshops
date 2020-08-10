@@ -8,6 +8,7 @@
 In this lab, we are going to deploy our backend API microservice. This is a SpringBoot Application exposing a rest endpoint.
 
 + Create Docker Registry Secret
++ Add cluster-admin role to the Jenkins service account
 + Update the tenancy and OCIR url in the JenkinsFile
 + Create Jenkins Pipeline using JenkinsFile
 + Verify the endpoint
@@ -29,6 +30,18 @@ Output:
 
 ```
 secret/ocirsecret created
+```
+
+### Add cluster-admin role to the Jenkins service account ###
+
+```
+kubectl create clusterrolebinding jenkins-deploy --clusterrole=cluster-admin --serviceaccount=default:cd-jenkins
+```
+
+Output: 
+
+```
+clusterrolebinding.rbac.authorization.k8s.io/jenkins-deploy created
 ```
 
 ### Update the tenancy and OCIR url in the JenkinsFile ###
