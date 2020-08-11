@@ -97,7 +97,7 @@ The Backend API is using a shared load balance, you need to check the ingress.ym
 
 ![](./images/people-web-app-pipeline-9.png)
 
-Therefore my url will be ***http://< ip  >/api/< restendpoint >***. Input this a browser of you choice. 
+Therefore my url will be ***http://< ip  >/< restendpoint >***. Input this a browser of you choice. 
 
 ![](./images/people-web-app-pipeline-10.png)
 
