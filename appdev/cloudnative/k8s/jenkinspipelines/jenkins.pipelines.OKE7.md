@@ -53,7 +53,7 @@ Before you can create your pipelines, you need to update the tenancy and ocir ur
 ![](./images/people-service-pipeline-00.png)
 
 **PLEASE NOTE:** 
-- that if the cluster in a different region other than eu-frankfurt then you will need to change the ocir url on line 4.
+- That if the cluster in a different region other than eu-frankfurt then you will need to change the ocir url on line 4.
 - If you are using the shared tenancy for Workshop, change line 2, add your name
  
 
