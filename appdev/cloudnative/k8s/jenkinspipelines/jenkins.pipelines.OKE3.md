@@ -8,13 +8,13 @@ In this lab, you are going to install, set up and configure Jenkins in your kube
 
 1. Install Helm. Instruction to install helm are [here](https://helm.sh/docs/using_helm/#installing-helm). Using [chocolatey](https://chocolatey.org/) is recommended
 2. Once Helm is installed, check if the version of helm that's running on you machine is the same as on your kubernetes cluster. To do this execute the following command:
-```shell
+```sh
 helm version
 ```
 
 Expected output:
 
-```shell
+```sh
 version.BuildInfo{Version:"v3.3.0", GitCommit:"8a4aeec08d67a7b84472007529e8097ec3742105", GitTreeState:"dirty", GoVersion:"go1.14.7"}
 ```
 
@@ -23,7 +23,7 @@ If you check the version again, they should be the same now.
 
 3. Now that helm all setup you can now start Jenkins setup. First, we are going to clone a git repository on to your machine. 
 
-```shell
+```sh
 mkdir oracle_projects
 cd oracle_projects
 git clone https://github.com/allenkubai/kubernetes.git
@@ -31,23 +31,28 @@ git clone https://github.com/allenkubai/kubernetes.git
 
 Once you have cloned the project, change into the project directory:
 
-```shell
+```sh
 cd kubernetes
 ```
 4. The next step before we install Jenkins, we need to create a persistance storage volume for jenkins in the kubernetes cluster. This is where jenkins will store it's data. To do this, use the deployment file already provided for you in this project: [https://github.com/allenkubai/kubernetes/blob/master/oracle/oke/helm/jenkins/jenkins-volume-claim.yaml](https://github.com/allenkubai/kubernetes/blob/master/oracle/oke/helm/jenkins/jenkins-volume-claim.yaml)
 
 To use this deployment file to create a volume claim execute the following command:
 
-```shell
+```sh
 kubectl create -f ./oracle/oke/helm/jenkins/jenkins-volume-claim.yaml
+```
+Output:
+```sh
 persistentvolumeclaim/jenkinsclaim created
 ```
 
 To check if the persistent volume claim has been create:
 
-```shell
+```sh
 kubectl get pvc
-
+```
+Output:
+```sh
 NAME           STATUS    VOLUME    CAPACITY   ACCESS MODES   STORAGECLASS   AGE
 jenkinsclaim   Bound     ocid1.**   100Gi      RWO            oci            66s
 ```
@@ -55,23 +60,23 @@ jenkinsclaim   Bound     ocid1.**   100Gi      RWO            oci            66s
 
 execute the following command:
 
-```shell
+```sh
 helm install cd-jenkins stable/jenkins -f ./oracle/oke/helm/jenkins/values.yaml --wait
 ```
 
 If you do not see the success message, instead seeing an error like
-```shell
+```sh
 Error: failed to download "stable/jenkins" (hint: running `helm repo update` may help)
 ```
 Please run the following commands and retry. This will update your helm repository
-```shell
+```sh
 helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 helm repo update
 ```
 
 Once it's done installing you will see the output below with instructions on how to get jenkins admin password and to get access to jenkin via port forwarding _(if yours is different, use the one in your output)_:
 
-```shell
+```sh
 cd-jenkins-84695c79d8-r4vmh  1/1    Running  0         2m
 
 1. Get your 'admin' user password by running:
@@ -84,7 +89,7 @@ cd-jenkins-84695c79d8-r4vmh  1/1    Running  0         2m
 
 Let's execute the first command to get our admin password:
 
-```shell
+```sh
 printf $(kubectl get secret --namespace default cd-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
 
 ZYV1o****
@@ -94,7 +99,7 @@ Now you have our password **ZYV1o****** copy it somewhere:
 ## Access Jenkins
 Next let setup our port forwarding for us to get access to Jenkin interface
 
-```shell
+```sh
 export JENKINS_POD=$(kubectl get pods --namespace default -l "component=cd-jenkins-master" -o jsonpath="{.items[0].metadata.name}")
 
 kubectl port-forward $JENKINS_POD 8080:8080
@@ -135,5 +140,7 @@ Note the login is similar to steps shown above.
 
 ---
 [Go back to Jenkins Pipelines Workshop Home page](README.md)
+
+[Previous](jenkins.pipelines.OKE2.md)
 
 [Next](jenkins.pipelines.OKE4.md)
