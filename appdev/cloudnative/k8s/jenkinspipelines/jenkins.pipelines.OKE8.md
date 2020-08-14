@@ -11,7 +11,16 @@ In this lab, we are going to deploy our backend API microservice. This is a Spri
 + Create Jenkins Pipeline using JenkinsFile
 + Connecting to the web application 
 
-### Update the tenancy, OCIR url and API endpoint in the JenkinsFile ###
+## Repository
+If you have not forked [people-web-app](https://github.com/allenkubai/people-web-app.git), please do so. Further on `people-web-app` will refer to your own forked version of the repository. Clone the `people-web-app` project on to your machine. `people-web-app` project is the front end web site.
+
+```sh
+cd oracle_projects
+
+git clone <url> #people-web-app
+```
+
+## Update the tenancy, OCIR url and API endpoint in the JenkinsFile ##
 
 Before you can create your pipelines, you need to update the tenancy and ocir url on the JenkinFile and commit to your git repository.
 
@@ -19,7 +28,9 @@ Before you can create your pipelines, you need to update the tenancy and ocir ur
 
 ![](./images/people-web-app-pipeline-00.png)
 
-**PLEASE NOTE: that if the cluster in a different region other than eu-frankfurt then you will need to change the ocir url on line 4.** 
+**PLEASE NOTE:**
+ - That if the cluster in a different region other than eu-frankfurt then you will need to change the ocir url on line 4.
+ - If you are using the shared tenancy for Workshop, change line 2, add your name
 
 2. Update the API rest endpoint in the people-web-app with the api endpoint generate from the previous pipeline. *Open* the file src/constants/index.js 
 
@@ -27,7 +38,7 @@ Before you can create your pipelines, you need to update the tenancy and ocir ur
 
 3. **Commit and push these two files to your git repository before you continue with the next step.** 
 
-### Create Jenkins Pipeline using JenkinsFile ###
+## Create Jenkins Pipeline using JenkinsFile ##
 
 1. Login to the Jenkins Instances.
 2. On the jenkins dashboard click on *Open Blue Ocean*. 
@@ -72,12 +83,12 @@ Once complete, you will see that the pipeline went through four steps
 
 To confirm that people-web-app is up, you get check the pods:
 
-```
+```sh
 kubectl get pods
 ```
 Output:
 
-```
+```sh
 NAME                                 READY     STATUS    RESTARTS   AGE
 cd-jenkins-7cdb6d66b4-l9z9d          1/1       Running   0          5h21m
 mysql-69cfc89647-fjk7c               1/1       Running   0          4h58m
@@ -87,7 +98,7 @@ people-web-app-86468bb8dc-9c6qx      1/1       Running   0          2m55s
 
 ```
 
-### Connecting to the web application ###
+## Connecting to the web application ##
 
 Let's get the public ip of our deploy service. Go to you pipeline execution and select *Deploy To Kubernetes*, then select the last output and expand it to get the public ip.
 
