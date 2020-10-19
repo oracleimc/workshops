@@ -1,11 +1,7 @@
 # DevOps: Deploying Microservices to OKE with Jenkins Pipelines (CI/CD) #
 
 **Step 1** - *Assumption* You have a Kubernetes Cluster.
-+ Git Client is installed including **Gitbash** - For windows users, this will give a unix command line. Download [here](https://git-scm.com/download/win)
-+ You have installed your favorited IDE (I am using visual code just for the purposes of the workshop)
-
-**Installation of these two tools is out of scope of this workshop.** 
-
++ Make sure that you have completed all [prerequisites](./prerequisites.md)
 
 # Prerequisites
 
@@ -16,15 +12,11 @@ You have a Kubernetes Cluster
 For you to effectively work on this workshop, you will need to set up a couple of tools on your machine/laptop. This tools include:
 
 + **oci cli** - *Oracle Cloud Infrastructure Command Line tool. You will need this for you to download the kubeconfig file that is required by kubectl for it to connect to your cluster.*
-+ **kubectl** - *Kubernetes commandline tool*
 
 + **Github Access Token** - Jenkins will need this to access you github repositories.
 
 Once this tools are installed and configured, you will now be able to download the **kubeconfig** file and use it to connect to your cluster.
 
-## Install kubectl ##
-
-This is the kubernetes command-line tool. You will be able to execute command to your cluster. To install it go [here](https://kubernetes.io/docs/tasks/tools/install-kubectl/)
 
 ## Install oci command line interface and download kubeconfig ##
 
@@ -35,6 +27,12 @@ Once you have oci cli installed you need to set up the config file. Before you c
 + Tenancy OCID
 + User OCID
 + OCI Region
+
+You can enter that information by invoking the following command.
+```sh
+oci setup config
+```
+If you have existing OCI config, you should either delete existing or add this as a seperate profile. If you are going to add this as a new profile to oci-cli config, you should be updating all future oci commands accordingly.
 
 ### Getting Tenancy OCID and OCI Region ###
 
@@ -114,21 +112,6 @@ You are now ready to download your kubeconfig file.
 You are now ready to download your kubeconfig file.
 
 
-### Add User to Group ###
-
-1. Click on *'Burger Menu' on the top left > Scroll to Identity > Users*
-2. Click your user, in this my case 'api.user' to open the user details page.
-
-3. Click on *Groups > Add to Group* as shown on the image below:
-
-![](./images/oci-console-user-group-1.png)
-
-4. Select the Group you want from the drop-down. In my case i'll choose *Administrators* Then Click *Add*.
-
-![](./images/oci-console-user-group-2.png)
-
-**You are now ready to download your kubeconfig file.**
-
 ### Download your Kubeconfig file ###
 
 1. Click on *'Burger Menu' on the top left > Scroll to Developer Services > Container Clusters*
@@ -166,5 +149,6 @@ To get your access token, go [here](https://help.github.com/en/articles/creating
 ---
 [Go back to Jenkins Pipelines Workshop Home page](README.md)
 
+[Previous](jenkins.pipelines.OKE1.md)
 
 [Next](jenkins.pipelines.OKE3.md)

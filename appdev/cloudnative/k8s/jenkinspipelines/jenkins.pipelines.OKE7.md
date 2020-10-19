@@ -14,7 +14,7 @@ In this lab, we are going to deploy our backend API microservice. This is a Spri
 + Verify the endpoint
 
 
-### Create Docker Registry Secret in the Cluster ###
+## Create Docker Registry Secret in the Cluster ##
 
 For the jenkins pipeline to be able to pull images from OCIR, we have to added our Auth Token to our cluster as a secret. 
 
@@ -22,41 +22,44 @@ For the jenkins pipeline to be able to pull images from OCIR, we have to added o
 
 **Please note if you are in another region apart from eu-frankfurt please also change the --docker-server**
 
-```
+```sh
 kubectl create secret docker-registry ocirsecret --docker-username='{tenancy}/{username}' --docker-password='{Auth Token}' --docker-server=fra.ocir.io --docker-email='api.user@acme.com'
 ```
 
 Output:
 
-```
+```sh
 secret/ocirsecret created
 ```
 
-### Add cluster-admin role to the Jenkins service account ###
+## Add cluster-admin role to the Jenkins service account ##
 
-```
+```sh
 kubectl create clusterrolebinding jenkins-deploy --clusterrole=cluster-admin --serviceaccount=default:cd-jenkins
 ```
 
 Output: 
 
-```
+```sh
 clusterrolebinding.rbac.authorization.k8s.io/jenkins-deploy created
 ```
 
-### Update the tenancy and OCIR url in the JenkinsFile ###
+## Update the tenancy and OCIR url in the JenkinsFile ##
 
-Before you can create your pipelines, you need to update the tenancy and ocir url on the JenkinFile and commit to your git repository.
+Before you can create your pipelines, you need to update the tenancy and ocir url on the JenkinFile and commit to your git repository: `people-service`.
 
 1. Open the JenkinFile. The file is located in the root directory of your project. 
 
 ![](./images/people-service-pipeline-00.png)
 
-**PLEASE NOTE: that if the cluster in a different region other than eu-frankfurt then you will need to change the ocir url on line 4.** 
+**PLEASE NOTE:** 
+- That if the cluster in a different region other than eu-frankfurt then you will need to change the ocir url on line 4.
+- If you are using the shared tenancy for Workshop, change line 2, add your name
+ 
 
-2. **Commit and push this file to your git repository before you continue with the next step.** 
+2. Commit and push this file to your git repository **before next step.** 
 
-### Create Jenkins Pipeline using JenkinsFile ###
+## Create Jenkins Pipeline using JenkinsFile ##
 
 1. Login to the Jenkins Instances.
 2. On the jenkins dashboard click on *Open Blue Ocean*. 
@@ -102,11 +105,11 @@ Once complete, you will see that the pipeline went through four steps
 
 To confirm that people-service is up, you get check the pods:
 
-```
+```sh
 kubectl get pods
 ```
 Output:
-```
+```sh
 NAME                              READY     STATUS    RESTARTS   AGE
 cd-jenkins-7cdb6d66b4-l9z9d       1/1       Running   0          5h5m
 mysql-69cfc89647-fjk7c            1/1       Running   0          4h42m
@@ -115,11 +118,11 @@ people-service-57f5f77574-wjdhg   1/1       Running   0          5m8s
 
 Also check the service was created
 
-```
+```sh
 kubectl get svc
 ```
 Output:
-```
+```sh
 NAME               TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)     AGE
 cd-jenkins         ClusterIP   10.96.187.120   <none>        8080/TCP    6h18m
 cd-jenkins-agent   ClusterIP   10.96.136.94    <none>        50000/TCP   6h18m
@@ -127,7 +130,7 @@ kubernetes         ClusterIP   10.96.0.1       <none>        443/TCP     6h37m
 mysql              ClusterIP   10.96.217.28    <none>        3306/TCP    5h54m
 people-service     ClusterIP   10.96.65.158    <none>        8080/TCP    6m
 ```
-### Verify the endpoint ###
+## Verify the endpoint ##
 
 Let's get the public ip of our deploy service. Go to you pipeline execution and select *Deploy To Kubernetes*, then select the last output and expand it to get the public ip.
 
