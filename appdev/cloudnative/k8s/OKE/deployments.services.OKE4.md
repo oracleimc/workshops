@@ -54,9 +54,7 @@ spec:
 To apply the deployment:
 
 ```
-cd oracle_projects/kubernetes
-
-kubectl apply -f ./oracle/oke/shared-ingress/cloud-generic.yaml
+kubectl apply -f https://raw.githubusercontent.com/allenkubai/kubernetes/master/oracle/oke/shared-ingress/cloud-generic.yaml
 
 ```
 For more information on how to create an Ingress controller on OKE go [here](https://docs.cloud.oracle.com/en-us/iaas/Content/ContEng/Tasks/contengsettingupingresscontroller.htm) 

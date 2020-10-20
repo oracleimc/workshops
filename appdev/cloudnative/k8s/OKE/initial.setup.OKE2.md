@@ -93,7 +93,7 @@ You are now ready to download your kubeconfig file.
 ### Getting User Auth Token ###
 
 1. Click on *'Burger Menu' on the top left > Scroll to Identity > Users*
-2. Click your user, in this my case 'api.user' to open the user details page.
+2. Click your **OWN** user, in this my case 'api.user' to open the user details page.
 
 3. Click on *Auth Tokens > Generate Token* as shown on the image below:
 
@@ -139,15 +139,11 @@ NAME        STATUS    ROLES     AGE       VERSION
 10.0.12.2   Ready     node      1d        v1.12.7
 ```
 
-## Github Access Token ##
-
-To get your access token, go [here](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line). Save it in a file somewhere you will need it later. 
-
 ### You are now ready to get started. ###
 
 ---
-[Go back to Jenkins Pipelines Workshop Home page](README.md)
+[Container Engine for Kubernetes (OKE) on OCI Workshop Home page](README.md)
 
-[Previous](jenkins.pipelines.OKE1.md)
+[Previous](create-cluster.OKE1)
 
-[Next](jenkins.pipelines.OKE3.md)
+[Next](deployments.storage.OKE3)

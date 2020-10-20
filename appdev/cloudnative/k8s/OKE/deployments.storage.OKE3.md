@@ -1,7 +1,7 @@
 # Container Engine for Kubernetes (OKE) on OCI Workshop #
 
 ## Introduction - Deployment: Persistent Storage - MySQL
-You some case you might wanted data to live past the lifetime of a container. In this case, you would need persistent storage. A persistent volume offers persistent storage that enables your data to remain intact, regardless of whether the containers to which the storage is connected are terminated.
+In some cases, you might wanted data to live past the lifetime of a container. In this case, you would need persistent storage. A persistent volume offers persistent storage that enables your data to remain intact, regardless of whether the containers to which the storage is connected are terminated.
 
 In this lab, we going to use a practical example, where you have a mysql database running on OKE and the data stored by the database should live past the lifetime of it's container. 
 
@@ -57,7 +57,6 @@ Output:
 ```
 
 NAME           STATUS    VOLUME    CAPACITY   ACCESS MODES   STORAGECLASS   AGE
-jenkinsclaim   Bound     ocid1.volume.**   100Gi      RWO            oci            63m
 mysqlclaim     Bound     ocid1.volume.**   50Gi       RWO            oci            35s
 
 ```
@@ -93,7 +92,6 @@ kubectl get pods
 Output:
 ```
 NAME                          READY     STATUS    RESTARTS   AGE
-cd-jenkins-74bbddd846-7k594   1/1       Running   0          140m
 mysql-69cfc89647-p42k7        1/1       Running   0          47s
 ```
 
@@ -105,8 +103,6 @@ kubectl get svc
 Output:
 ```
 NAME               TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)     AGE
-cd-jenkins         ClusterIP   10.96.186.250   <none>        8080/TCP    140m
-cd-jenkins-agent   ClusterIP   10.96.223.114   <none>        50000/TCP   140m
 kubernetes         ClusterIP   10.96.0.1       <none>        443/TCP     180m
 mysql              ClusterIP   10.96.136.57    <none>        3306/TCP    1m
 ```
@@ -137,6 +133,6 @@ Now you are ready to deploy the Backend API
 ---
 [Container Engine for Kubernetes (OKE) on OCI Workshop Home page](README.md)
 
-[Previous](deployments.storage.OKE2.md)
+[Previous](initial.setup.OKE2)
 
-[Next](deployments.storage.OKE4.md)
+[Next](deployments.services.OKE4)

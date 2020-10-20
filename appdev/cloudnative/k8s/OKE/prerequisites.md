@@ -4,7 +4,7 @@
 2. Install required programs
     1. A code editor / IDE. (Such as Sublime, Notepad++ or VS Code). We recommend using [VS Code](https://code.visualstudio.com/download)
     2. Git Client, download if from [git-SCM](https://git-scm.com/download/)
-    3. [Oracle Cloud CLI](https://docs.cloud.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm) (oci). For Windows, please note that, you need PowerShell (as admin) in order to install (for the rest, we will be using bash terminal). Just install the CLI, do not configure it yet.
+    3. [Oracle Cloud CLI](https://docs.cloud.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm) (oci). For Windows, please note that, you need PowerShell (as admin) in order to install (for the rest, we will be using bash terminal). Just install the CLI, **DO NOT** configure it yet.
     4.  Several programs can be installed easly via third party package manager. On Linux/Mac you can use brew, on Windows you can use Chocolatery
         * [Chocolatery](https://chocolatey.org/) (Windows)
             * Kubernetes cli (kubectl). If you have Docker (desktop) installed this is bundled, no need to install.
@@ -19,10 +19,7 @@
                 ```
 3. If you have not set up [Git ssh](https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent), please do so. This gives you the option to clone and push without password.
 4. If you are going to use your own tenancy, you need to make sure that correct permissions are in place, check [Own Tenancy](#own-tenancy) section. If you are to use the **emeaccoe** enviornment, please follow instructions of your trainer. Also check information about using [emeaccoe](./emeaccoe.md).
-5. Configure your Oracle CLI based on the information on the previous step.
-    ```sh
-    oci setup config
-    ```
+
 
 ## Using Git & GitHub
 After completing the step 3 (Git ssh), you can clone and push repositories via SSH.

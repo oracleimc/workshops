@@ -41,3 +41,5 @@ Fork button is on top left on each repository. _You do not require to fork this 
 4. [Create an Ingress Controller (Load Balancer) for the kubernetes cluster](deployments.services.OKE4.md).
 5. [Setup the Oracle Cloud Infrastructure Registry (OCIR)](deployments.services.OKE5.md)
 6. [Deploy the people-service Backend API](deployments.services.OKE6.md)
+7. [Deploy the people-web-app](deployments.services.OKE7.md)
+
