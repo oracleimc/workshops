@@ -15,6 +15,10 @@ Now we now ready to deploy our Frontend container people-web-app to our kubernet
 
 This is quite a simple application. It just a ReactJS application that consumes a rest endpoint.
 
+Before you can build the application, you need to update the API rest endpoint in the people-web-app with the api endpoint. Open the file **src/constants/index.js** and replace with the Base IP of the ingress controller.
+
+![](./images/people-web-app-pipeline-00-1.png)
+
 To build this application will are going to use **npm**.
 
 ```
@@ -23,6 +27,17 @@ cd oracle_projects/people-web-app
 npm install
 
 npm run build --production
+
+```
+
+Output:
+
+```
+The build folder is ready to be deployed.
+You may serve it with a static server:
+
+  yarn global add serve
+  serve -s build
 
 ```
 This action will create a build folder containing all the ReactJS components to run the web application.
@@ -66,6 +81,8 @@ The simplest command is *docker build* which will build the image locally. Howev
 
 So how do we do this? We need to tag our image in a special format. Here is the format of tag: *{region-key}.ocir.io/{tenancy-namespace}/{repo-name}/{image-name}:{tag}*
 
+**For Shared env, Please replace the repo-name with your own name. Instead of oracleimc, maybe allenkubai**
+
 ```
 fra.ocir.io/emeaccoe/oracleimc/people-web-app:1.0
 ```
@@ -76,13 +93,36 @@ fra.ocir.io/emeaccoe/oracleimc/people-web-app:1.0
 + {image-name} -  is the name you want to give the image in Oracle Cloud Infrastructure Registry (for example, people-web-app).
 * {tag} - is an image tag you want to give the image in Oracle Cloud Infrastructure Registry (for example, 1.0).
 
-Now that we have that out of the way and we have constructed our tag, it's now time to build our image. To build and tag the image you can use the following command:
+Now that we have that out of the way and we have constructed our tag, it's now time to build our image. To build and tag the image you can use the following command: **Note the space and . at the end**
 
 ```
 docker build -t fra.ocir.io/emeaccoe/oracleimc/people-web-app:1.0 . 
 ```
 
-Image Here of build
+Output:
+
+```
+Sending build context to Docker daemon  4.901MB
+Step 1/6 : FROM node:9.4
+ ---> c888d933885c
+Step 2/6 : WORKDIR /usr/src/app
+ ---> Using cache
+ ---> 1cfe46491e70
+Step 3/6 : EXPOSE 5000
+ ---> Using cache
+ ---> 6f51869f0e69
+Step 4/6 : RUN npm install -g serve
+ ---> Using cache
+ ---> e85cd99dea72
+Step 5/6 : COPY ./build /usr/src/app/build
+ ---> 1b8a43a61e5a
+Step 6/6 : CMD serve -s build
+ ---> Running in 18c5b90419aa
+Removing intermediate container 18c5b90419aa
+ ---> 3baa998c2f19
+Successfully built 3baa998c2f19
+Successfully tagged fra.ocir.io/emeaccoe/oracleimc/people-web-app:1.0
+```
 
 We are using '-t' to tell the build to tag the image during the build.
 
@@ -94,7 +134,11 @@ docker images
 
 Output:
 
-IMAGEHERE
+```
+REPOSITORY                                              TAG                 IMAGE ID            CREATED             SIZE
+fra.ocir.io/emeaccoe/oracleimc/people-web-app           1.0                 3baa998c2f19        39 seconds ago      686MB
+fra.ocir.io/emeaccoe/oracleimc/people-rest-service      1.0                 909821496d6d        29 minutes ago      134MB
+```
 
 Confirm that the tagging is fine. Next we can now push our image to our OCIR using the command *docker push {tagname}*
 
@@ -104,7 +148,21 @@ docker push fra.ocir.io/emeaccoe/oracleimc/people-web-app:1.0
 
 Output:
 
-IMAGEHERE
+```
+The push refers to repository [fra.ocir.io/emeaccoe/oracleimc/people-web-app]
+6a2a349d621d: Pushed 
+694a4033f91c: Pushed 
+a1a7dd69eaf8: Pushed 
+cbe2c090ad21: Pushed 
+818281c5d4fb: Pushed 
+50599c766115: Pushed 
+d4141af68ac4: Pushed 
+8fe6d5dcea45: Pushed 
+06b8d020c11b: Pushed 
+b9914afd042f: Pushed 
+4bcdffd70da2: Pushed 
+1.0: digest: sha256:d3dd00ab3b9983eb1a69a48aba34c02c1ffee70a2fa0ac6b625b9c21289dd466 size: 2635
+```
 
 That was easy right??? Now let deploy to OKE
 
@@ -133,7 +191,7 @@ To do this we use the kubectl commands.
 To deploy our people service deployment:
 
 ```
-kubectl apply -f ./k8s/deployments/people-web-app-deployment.yaml
+kubectl apply -f ./k8s/deployments/people-service-web-app-deployment.yaml
 ```
 
 To confirm that people-web-app is up, you get check the pods:

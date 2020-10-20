@@ -74,6 +74,8 @@ ingress-nginx   LoadBalancer   10.96.13.245   130.61.198.159      80:30756/TCP,4
 
 *if you see Pending under EXTERNAL-IP, just repeat the command*
 
+**Copy the IP and place somewhere for later use**
+
 3. Now check if you can see you load balancer on your OCI console.
 
 ![](./images/kube-ingress-2.png)

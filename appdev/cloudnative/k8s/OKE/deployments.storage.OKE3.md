@@ -28,9 +28,14 @@ git clone <url>
 Once the project has finished cloning, change into the directory:
 
 ```
-cd people-rest-service
+cd people-service
 ```
 
+If you are using VisualCode the you can do to open the application in the IDE:
+
+```
+code .
+```
 2. As part of this project, it comes with kubernete descriptors for creating you mysql instance. We are going to start with creating the persistent volume for mysql. While in the project's folder execute the following command. If you are using a different Region other than EU-FRANKFURT. Then:
 
 **Fix and apply correct claim:**

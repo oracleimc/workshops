@@ -22,6 +22,13 @@ cd oracle_projects/people-service
 
 ./gradlew clean build
 ```
+
+Output:
+
+```
+BUILD SUCCESSFUL in 3m 54s
+4 actionable tasks: 3 executed, 1 up-to-date
+```
 This action will create a jar file *people-service-0.1.0.jar* in the build folder. Something like *build/libs/people-service-0.1.0.jar*
 
 This location is quite important as will are going to use this to copy the jar file into the image during the docker image build.
@@ -55,6 +62,8 @@ The simplest command is *docker build* which will build the image locally. Howev
 
 So how do we do this? We need to tag our image in a special format. Here is the format of tag: *{region-key}.ocir.io/{tenancy-namespace}/{repo-name}/{image-name}:{tag}*
 
+**For Shared env, Please replace the repo-name with your own name. Instead of oracleimc, maybe allenkubai**
+
 ```
 fra.ocir.io/emeaccoe/oracleimc/people-rest-service:1.0
 ```
@@ -65,13 +74,38 @@ fra.ocir.io/emeaccoe/oracleimc/people-rest-service:1.0
 + {image-name} -  is the name you want to give the image in Oracle Cloud Infrastructure Registry (for example, people-rest-service).
 * {tag} - is an image tag you want to give the image in Oracle Cloud Infrastructure Registry (for example, 1.0).
 
-Now that we have that out of the way and we have constructed our tag, it's now time to build our image. To build and tag the image you can use the following command:
+Now that we have that out of the way and we have constructed our tag, it's now time to build our image. To build and tag the image you can use the following command: **Note the space and . at the end**
 
 ```
 docker build -t fra.ocir.io/emeaccoe/oracleimc/people-rest-service:1.0 . 
 ```
 
-Image Here of build
+Output:
+
+```
+Sending build context to Docker daemon  39.37MB
+Step 1/6 : FROM openjdk:8-jdk-alpine
+ ---> 54ae553cb104
+Step 2/6 : VOLUME /tmp
+ ---> Using cache
+ ---> 1d58d13c4df1
+Step 3/6 : EXPOSE 8080
+ ---> Running in 35ce36445944
+Removing intermediate container 35ce36445944
+ ---> 2fccc524378d
+Step 4/6 : ARG JAR_FILE=build/libs/people-service-0.1.0.jar
+ ---> Running in 20b14cecb3e9
+Removing intermediate container 20b14cecb3e9
+ ---> d4e40145e594
+Step 5/6 : COPY ${JAR_FILE} app.jar
+ ---> aa9eb6047949
+Step 6/6 : ENTRYPOINT ["java","-jar","/app.jar"]
+ ---> Running in 0d7fb953b60e
+Removing intermediate container 0d7fb953b60e
+ ---> 909821496d6d
+Successfully built 909821496d6d
+Successfully tagged fra.ocir.io/emeaccoe/oracleimc/people-rest-service:1.0
+```
 
 We are using '-t' to tell the build to tag the image during the build.
 
@@ -83,7 +117,10 @@ docker images
 
 Output:
 
-IMAGEHERE
+```
+REPOSITORY                                              TAG                 IMAGE ID            CREATED             SIZE
+fra.ocir.io/emeaccoe/oracleimc/people-rest-service      1.0                 909821496d6d        56 seconds ago      134MB
+```
 
 Confirm that the tagging is fine. Next we can now push our image to our OCIR using the command *docker push {tagname}*
 
@@ -93,7 +130,14 @@ docker push fra.ocir.io/emeaccoe/oracleimc/people-rest-service:1.0
 
 Output:
 
-IMAGEHERE
+```
+The push refers to repository [fra.ocir.io/emeaccoe/oracleimc/people-rest-service]
+0608bcf688c3: Pushed 
+f2ec1bba02a6: Pushed 
+0c3170905795: Pushed 
+df64d3292fd6: Pushed 
+1.0: digest: sha256:bed6caa96ea890512c39095efb0eef2dcdd58a56404287eea2a99b741902fc7e size: 1159
+```
 
 That was easy right??? Now let deploy to OKE
 
