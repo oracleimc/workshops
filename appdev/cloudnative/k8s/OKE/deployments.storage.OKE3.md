@@ -31,7 +31,13 @@ Once the project has finished cloning, change into the directory:
 cd people-rest-service
 ```
 
-2. As part of this project, it comes with kubernete descriptors for creating you mysql instance. We are going to start with creating the persistent volume for mysql. While in the project's folder execute the following command.
+2. As part of this project, it comes with kubernete descriptors for creating you mysql instance. We are going to start with creating the persistent volume for mysql. While in the project's folder execute the following command. If you are using a different Region other than EU-FRANKFURT. Then:
+
+**Fix and apply correct claim:**
++ Edit the claim file (mysql-volume-claim.yaml)
++ Replace `EU-FRANKFURT-1-AD-1` to the correct one* (such as `UK-LONDON-1-AD-1` if you are using London region)
++ Save
+
 
 ```
 kubectl create -f ./k8s/claims/mysql-volume-claim.yaml 
@@ -55,6 +61,9 @@ jenkinsclaim   Bound     ocid1.volume.**   100Gi      RWO            oci        
 mysqlclaim     Bound     ocid1.volume.**   50Gi       RWO            oci            35s
 
 ```
+
+*More information and region names can be found in [Creating a Persistent Volume Claim](https://docs.cloud.oracle.com/en-us/iaas/Content/ContEng/Tasks/contengcreatingpersistentvolumeclaim.htm) documentation*
+
 3. Let's now store our mysql password as a secret in your kubernetes cluster. To do this:
 
 ```

@@ -16,12 +16,13 @@ In this lab, we are going to deploy our backend API microservice. This is a Spri
 In a terminal window on the client machine running Docker, log in to Oracle Cloud Infrastructure Registry by entering:
 
 ```
-docker login <region-key>.ocir.io
+docker login {region-key}.ocir.io
 ```
-where <region-key> is the key for the Oracle Cloud Infrastructure Registry region you're using. For example, phx. See the [Availability by Region](https://docs.cloud.oracle.com/iaas/Content/Registry/Concepts/registryprerequisites.htm#Availab) topic in the Oracle Cloud Infrastructure Registry documentation.
+where {region-key} is the key for the Oracle Cloud Infrastructure Registry region you're using. For example, phx. See the [Availability by Region](https://docs.cloud.oracle.com/iaas/Content/Registry/Concepts/registryprerequisites.htm#Availab) topic in the Oracle Cloud Infrastructure Registry documentation.
 
-username: <tenancy>/<username>
-password: <AuthToken>
+username: {tenancy}/{username}
+
+password: {AuthToken}
 
 For example
 
