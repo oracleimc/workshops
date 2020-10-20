@@ -164,6 +164,10 @@ b9914afd042f: Pushed
 1.0: digest: sha256:d3dd00ab3b9983eb1a69a48aba34c02c1ffee70a2fa0ac6b625b9c21289dd466 size: 2635
 ```
 
+We can check the container registry on the Oracle cloud infrastructure console:
+
+![](./images/people-service-web-app-ocir-01.png)
+
 That was easy right??? Now let deploy to OKE
 
 ## Deploy to Kubernetes ##
@@ -264,4 +268,6 @@ As you can see your application is now up and running!!
 
 [Previous](deployments.services.OKE6.md)
 
-[Next](deployments.services.OKE7.md)
+---
+
+**The End**

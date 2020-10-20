@@ -229,7 +229,7 @@ kubectl proxy
 
 + Open a new browser window and go to http://localhost:8001/api/v1/namespaces/kubernetes-dashboard/services/https:kubernetes-dashboard:/proxy/. to display the Kubernetes Dashboard.
 
-Image Here
+![](./images/oci-console-cluster-4.png)
 
 ### You are now ready to get started. ###
 

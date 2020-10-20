@@ -138,6 +138,9 @@ f2ec1bba02a6: Pushed
 df64d3292fd6: Pushed 
 1.0: digest: sha256:bed6caa96ea890512c39095efb0eef2dcdd58a56404287eea2a99b741902fc7e size: 1159
 ```
+We can check the container registry on the Oracle cloud infrastructure console:
+
+![](./images/people-service-ocir-01.png)
 
 That was easy right??? Now let deploy to OKE
 
@@ -222,4 +225,4 @@ As you can see you backend api is now up and running!!
 
 [Previous](deployments.services.OKE5.md)
 
-[Next](deployments.services.OKE6.md)
+[Next](deployments.services.OKE7.md)
