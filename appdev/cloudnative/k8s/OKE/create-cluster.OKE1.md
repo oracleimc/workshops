@@ -20,7 +20,9 @@ You can create using the Quick create option.
     ![](./images/oke-create-4.png)
     10. After seeing Active state, you can proceed with next steps
 
-[Go back to Jenkins Pipelines Workshop Home page](README.md)
+---
 
-[Next](jenkins.pipelines.OKE2.md)
+[Container Engine for Kubernetes (OKE) on OCI Workshop Home page](README.md)
+
+[Next](initial.setup.OKE2.md)
 

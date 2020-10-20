@@ -55,3 +55,7 @@ The following policies will grant permissions to specific "group" to work. Repla
 3. Add Statement: `allow group <group> to manage repos in tenancy`
 4. Press `+ Another Statement`, please repeat for each statement
 4. Add Statement: `allow group <group> to manage all-resources in compartment <compartment>`
+
+---
+
+[Container Engine for Kubernetes (OKE) on OCI Workshop Home page](README.md)

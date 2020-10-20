@@ -42,3 +42,7 @@ If you have created the secret and need to change it, you need to delete it:
 ```sh
 kubectl delete secret ocirsecret
 ```
+
+----
+
+[Container Engine for Kubernetes (OKE) on OCI Workshop Home page](README.md)
