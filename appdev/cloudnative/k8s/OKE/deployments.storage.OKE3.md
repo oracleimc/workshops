@@ -1,14 +1,14 @@
 # Container Engine for Kubernetes (OKE) on OCI Workshop #
 
-## Introduction - Deployment: Storage
+## Introduction - Deployment: Persistent Storage - MySQL
 You some case you might wanted data to live past the lifetime of a container. In this case, you would need persistent storage. A persistent volume offers persistent storage that enables your data to remain intact, regardless of whether the containers to which the storage is connected are terminated.
 
 In this lab, we going to use a practical example, where you have a mysql database running on OKE and the data stored by the database should live past the lifetime of it's container. 
 
 # Prerequisites
-Make sure you have completed the Initail Setup  [Step 2](jenkins.pipelines.OKE2.md).
+Make sure you have completed the [Initail Setup](initial.setup.OKE2.md).
 
-# Step 2  - Create Mysql Server in the kubernetes cluster #
+# Create Mysql Server in the kubernetes cluster #
 In this lab, you are going to set up a mysql server instance in your kubernetes cluster. For this lab, we are going to use the public docker image for mysql. Here are the summary of steps
 
 + Create a **Persistance Volume** for mysql

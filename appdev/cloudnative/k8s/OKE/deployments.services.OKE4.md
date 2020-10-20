@@ -1,9 +1,9 @@
 # Container Engine for Kubernetes (OKE) on OCI Workshop #
 
 # Prerequisites
-Make sure you have completed the Initail Setup  [Step 2](jenkins.pipelines.OKE2.md).
+Make sure you have completed the [Initail Setup](initial.setup.OKE2.md)
 
-# Step - Create an Ingress Controller (Load Balancer) for the kubernetes cluster #
+# Create an Ingress Controller (Load Balancer) for the kubernetes cluster #
 In this lab, you are going to set up an Ingress for the applications. Ingress allows external access to services within the Kubernetes cluster. In our case, our we are going to create an nginx-ingress-controller which will be Load Balance that will be shared by the FrontEnd application and by the Backend application.
 
 + Create the Load Balancer

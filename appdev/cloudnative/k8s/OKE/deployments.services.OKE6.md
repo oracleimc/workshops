@@ -1,10 +1,10 @@
 # Container Engine for Kubernetes (OKE) on OCI Workshop #
 
 # Prerequisites
-+ Make sure you have completed the Initail Setup  [Step 3](jenkins.pipelines.OKE2.md).
++ Setup the Oracle Cloud Infrastructure Registry (OCIR) [Go Back](deployments.services.OKE5.md).
 
 
-# Step 7 -Deploy the people-service Rest API #
+# Deploy the people-service Rest API #
 Now we now ready to deploy our backend container people-service to our kubernetes cluster. To do this, you will need to first build the application, then build the docker image and push the image to the oracle cloud image registry (OCIR), then deploy the people-service k8s deployment.
 
 + Build Springboot Application 
@@ -176,6 +176,6 @@ As you can see you backend api is now up and running!!
 ---
 [Container Engine for Kubernetes (OKE) on OCI Workshop Home page](README.md)
 
-[Previous](deployments.storage.OKE5.md)
+[Previous](deployments.services.OKE5.md)
 
-[Next](deployments.storage.OKE6.md)
+[Next](deployments.services.OKE6.md)
