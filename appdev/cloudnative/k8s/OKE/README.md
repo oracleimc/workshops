@@ -8,10 +8,10 @@ Container Engine for Kubernetes uses Kubernetes - the open-source system for aut
 
 In this workshop, you will learn how to setup: 
 
-+ **Set up Kubernetes , Policies**
-+ **Deployments - Storage, service**
-+ **OCI Customization** running on Springboot (Java)
-+ **Rolling out updates** 
++ **Set up Kubernetes and OCI Policies**
++ **Deployments - Storage, services**
++ **Load Balancer - Ingress Controller** 
++ **Oracle Cloud Infrastructure Registry (OCIR)**
 
 ## Prerequisites ##
 
