@@ -5,7 +5,10 @@
     1. A code editor / IDE. (Such as Sublime, Notepad++ or VS Code). We recommend using [VS Code](https://code.visualstudio.com/download)
     2. Git Client, download if from [git-SCM](https://git-scm.com/download/)
     3. [Oracle Cloud CLI](https://docs.cloud.oracle.com/en-us/iaas/Content/API/SDKDocs/cliinstall.htm) (oci). For Windows, please note that, you need PowerShell (as admin) in order to install (for the rest, we will be using bash terminal). Just install the CLI, **DO NOT** configure it yet.
-    4.  Several programs can be installed easly via third party package manager. On Linux/Mac you can use brew, on Windows you can use Chocolatery
+    4. Install **Docker**
+        * For [Windows](https://docs.docker.com/docker-for-windows/install/)
+        * For [Linux/Mac](https://docs.docker.com/engine/install/)
+    5.  Several programs can be installed easly via third party package manager. On Linux/Mac you can use brew, on Windows you can use Chocolatery
         * [Chocolatery](https://chocolatey.org/) (Windows)
             * Kubernetes cli (kubectl). If you have Docker (desktop) installed this is bundled, no need to install.
                 ```sh
