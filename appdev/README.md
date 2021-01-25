@@ -1,2 +1,2 @@
 # Application Development Workshops
-+ [Cloud Native Workshops](cloudnative/README.md)
+- [Cloud Native Workshops](./cloudnative/README.md)
