@@ -83,7 +83,7 @@ The function accesses the Autonomous Database using SODA (Simple Oracle Document
 1. Open the navigation menu, select **Autonomous Data Warehouse**.
 2. Click **Create Autonomous Database**.
 3. From the list, select your development compartment.
-4. For display name and database name, enter `funcdb`.
+4. For display name and database name, enter `funcdb`. *Database names in the tenancy are to be unique. For a shared environment, plese use a different name for this and further references*
 5. For the workload type, select **Transaction Processing**.
 6. For deployment type, select **Shared Infrastructure**.
 7. Enter the admin password. *Keep that password safe, you will use this later*
