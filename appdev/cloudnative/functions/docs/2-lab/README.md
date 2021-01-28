@@ -22,10 +22,8 @@ In this step, you will create an application and set up Fn CLI on Cloud Shell.
 5. Select the VNC you created earlier (e.g. fn-vcn).
 6. Select the public subnet.
 7. Click Create.
-8. Click on the created application to open the application details.
-9. Click the Getting Started link and follow the Begin your Cloud Shell session and Setup fn CLI on Cloud Shell sections in the Cloud Shell Setup.
-
     ![](./images/create-fn-app.png)  
+8. Click on the created application to open the application details.
 
 ## STEP 2: Create a Dynamic Group
 To use other OCI Services, your function must be part of a **dynamic group**. For information on creating dynamic groups, refer to the [documentation](https://docs.cloud.oracle.com/iaas/Content/Identity/Tasks/managingdynamicgroups.htm#To).
