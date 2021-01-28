@@ -89,7 +89,7 @@ There are other ways to invoke that function. You can invoke a function:
 ### Invoke using OCI CLI
 The format for invoking function using OCI CLI is the following:
 ```shell
-$ oci fn function invoke <function-ocid> --file "<output-filepath>" --body "<request-parameters>"
+$ oci fn function invoke --function-id <function-ocid> --file "<output-filepath>" --body "<request-parameters>"
 ```
 You can get the OCID of the function in the following steps:
 1. Open Application
