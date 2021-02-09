@@ -34,7 +34,7 @@ Once you have oci cli installed you need to set up the config file. Before you c
 ![](./images/oci-console-tenancy-2.png)
 
 3. Copy the Tenancy OCID into a file somewhere for reference later.
-4. Copy the region name, then go to ![Regions](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm) and get the region identify into a file somewhere for reference later. For example *Germany Central (Frankfurt)* region identify is **eu-frankfurt-1**
+4. Copy the region name, then go to [Regions](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm) and get the region identify into a file somewhere for reference later. For example *Germany Central (Frankfurt)* region identify is **eu-frankfurt-1**
 5. Copy the tenancy namespace into a file somewhere fore reference later.
 
 ### Getting User OCID ###
