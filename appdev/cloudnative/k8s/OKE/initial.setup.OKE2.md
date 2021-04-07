@@ -205,7 +205,7 @@ awk '{print $1}')
 The output from the above command includes an authentication token (a long alphanumeric string) as the value of the token: element, as shown below:
 
 ```
-ame: oke-admin-token-gwbp2
+Name: oke-admin-token-gwbp2
 Namespace: kube-system
 Labels: <none>
 Annotations: kubernetes.io/service-account.name: oke-admin
