@@ -32,7 +32,7 @@ Assuming you have installed all, let's make a test run:
     If you need to `sudo docker`, means you have a missing post installation step. Follow the [Post-installation steps for Linux](https://docs.docker.com/engine/install/linux-postinstall/) guide
 3. OCI
     ```shell
-    $ oci iam compartment list
+    $ oci os ns get
     ```
     Expected response is a JSON output. If you get a different result, error, than you need to finish configuring OCI:
     ```shell
@@ -42,7 +42,7 @@ Assuming you have installed all, let's make a test run:
     - [Regions and Availability Domains](https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm#top)
     - [Required Keys and OCIDs](https://docs.oracle.com/en-us/iaas/Content/API/Concepts/apisigningkey.htm)
     
-    After configuring OCI, retry first command
+    After configuring OCI, retry first command, and copy the tenancy namespace into a file for use later.
 4. Fn
     ```shell
     fn --version
@@ -53,7 +53,17 @@ Assuming you have installed all, let's make a test run:
     ```
     Version could be equal or greater than this
 
+5. Get Auth Token
 
+    1. Click on *'Profile icon' on the top Right > Select your username 'oracleidentitycloudservice/allen******' *
+
+    2. In your User details page scroll and go to Right hand-side *Resources*.
+
+    3. Click on *Auth Tokens > Generate Token*
+
+    4. Add a description then click *Generate Token*
+
+    5. The generated token appears. **Please click on copy and save it in a file somewhere. You cannot retrive it later**
 
 ## Using a development environment on OCI
 This step is **optional** for Linux or Mac users, it is recommended for Windows user.
