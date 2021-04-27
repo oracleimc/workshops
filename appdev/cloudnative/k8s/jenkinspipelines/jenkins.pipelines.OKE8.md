@@ -26,6 +26,8 @@ Before you can create your pipelines, you need to update the tenancy and ocir ur
 
 1. Open the JenkinFile. The file is located in the root directory of your project. 
 
+**Note: In the tenancy field use your TENANCY NAMESPACE**
+
 ![](./images/people-web-app-pipeline-00.png)
 
 **PLEASE NOTE:**
