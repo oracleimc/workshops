@@ -31,7 +31,7 @@ In this exercise you will create your very first Functions app, Hello World
     ![](./images/Function_003.png)  
 
 ## Step2: Setup Policy
-If you are using *emeaccoe* tenancy or a tenancy is provided for you for the workshop, policies might be created for you. In that case you do not need to setup policies, skip this step. Ask you trainer!
+> If you are using *emeaccoe* tenancy or a tenancy is provided for you for the workshop, policies might be created for you. In that case you do not need to setup policies, skip this step. Ask you trainer!
 
 1. From the OCI services menu click **Policies** under **Identity**.
     ![](./images/Function_040.png)  
