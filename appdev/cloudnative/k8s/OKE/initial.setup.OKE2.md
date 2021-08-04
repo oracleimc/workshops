@@ -190,15 +190,15 @@ kubectl apply -f https://raw.githubusercontent.com/allenkubai/kubernetes/master/
 serviceaccount/oke-admin created
 clusterrolebinding.rbac.authorization.k8s.io/oke-admin created
 ```
-2. Before we can login to the dashboard we need to get the access token for the dashboard-user. We do this using kubectl
+2. Before we can login to the dashboard we need to get the access token for the oke-admin. We do this using kubectl
 ```shell
-kubectl -n kube-system describe secret `kubectl -n kube-system get secret | grep dashboard-user | awk '{print $1}'`
+kubectl -n kube-system describe secret `kubectl -n kube-system get secret | grep oke-admin | awk '{print $1}'`
 ```
 ```
-Name:         dashboard-user-token-mhtf9
+Name:         oke-admin-token-mhtf9
 Namespace:    kube-system
 Labels:       
-Annotations:  kubernetes.io/service-account.name: dashboard-user
+Annotations:  kubernetes.io/service-account.name: oke-admin
               kubernetes.io/service-account.uid: a09cd40c-2663-11ea-a75b-025000000001
 
 Type:  kubernetes.io/service-account-token
