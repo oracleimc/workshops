@@ -28,7 +28,7 @@ Fork button is on top left on each repository. _You do not require to fork this 
 ![](./images/github-fork1.png)
 
 ## Workshop execution
-- If this workshop to be executed on emeaccoe tenancy, please follow the steps in the [emeaccoe guide](./emeaccoe.md)
+- If this workshop to be executed on emeaccoe tenancy, please follow the steps in the [emeaccoe guide](../../../../common/register.md)
 - If you are to execute the flows on region other than Frankfurt, please review steps in [region guide](./region.md)
 
 ## Steps to follow ##
