@@ -18,5 +18,4 @@ IMC organization is EMEA Oracle Partner focused. Any partner from EMEA is welcom
     2. [Configuring development environment](./docs/development.md)
 2. [Exercise1](./docs/1-lab/README.md): Writing for the first time: Hello World function
 3. [Exercise2](./docs/2-lab/README.md): Cloud Native flow
-4. [Exercise3](./docs/3-lab/README.md): Troubleshooting
-5. [Exercise4](./docs/4-lab/README.md): Public Access using API Gateway
+4. [Exercise3](./docs/3-lab/README.md): Public Access using API Gateway

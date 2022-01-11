@@ -162,6 +162,7 @@ To test the function, you can upload a .csv file to the input-bucket. You can do
     ```shell
     $ oci os object put  --bucket-name [INPUT-BUCKET] --file file1.csv
     ```
+    Quicky check the file uploaded to `input-bucket` from the OCI web console. File will not stay there for a long time!
 
 To see the data in the database, follow these steps:
 1. From the OCI console, navigate to **Autonomous Data Warehouse**.
@@ -180,6 +181,18 @@ To see the data in the database, follow these steps:
 11. Click the green play button to execute the query.
 12. The data from the CSV file is in the **Query Result** tab.
 
-You can also check the file uploaded to `input-bucket` from the OCI web console
+## STEP 9: Check Files
+Please review both of the `input-bucket` and `output-bucket`. As you will notice the flow is like this:
+1. Whenever a file is created on `input-bucket` 
+2. Object storage will emit an event. Based on the rule (excluding updating file) that we have created this will trigger a function `oci-load-file-into-adw-python`
+3. Function will:
+    1. Download and read the (csv) file
+    2. Write values in ADB
+    3. Copy the file to `output-bucket`
+    4. Delete the file in `input-bucket` 
+
+Please review `input-bucket` and `output-bucket` for the file.
+
+You may try the same with `file2.csv` and `file3.csv`
 
 This concludes this exercise.
