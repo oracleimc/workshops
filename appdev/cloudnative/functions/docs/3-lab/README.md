@@ -39,7 +39,7 @@ We are going to deploy the API Gateway in the same VCN with our Applications/Fun
     1. **Basic Information**
         - From Scratch
         - Name: `Functions`
-        - Path Prefix: `v1`
+        - Path Prefix: `/v1`
         - Compartment: *same as your functions [or leave it as is]*
         - Press **Next**
         ![](./images/create-deployment-1.png)  
