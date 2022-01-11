@@ -170,14 +170,15 @@ To see the data in the database, follow these steps:
 4. Click on the database name (`funcdb`).
 5. Click the **Service Console**.
 6. Click **Development** link from the side bar.
-7. Click **SQL Developer Web**.
+7. Click **Database Actions**.
 8. Use **ADMIN** and the admin password to authenticate.
-9. In the worksheet, enter the following query:
+9. Select Development > **SQL**; skip tutorial if you are familiar with the tool
+10. In the worksheet, enter the following query:
     ```sql
     select UTL_RAW.CAST_TO_VARCHAR2( DBMS_LOB.SUBSTR( JSON_DOCUMENT, 4000, 1 )) AS json from regionsnumbers
     ```
-10. Click the green play button to execute the query.
-11. The data from the CSV file is in the **Query Result** tab.
+11. Click the green play button to execute the query.
+12. The data from the CSV file is in the **Query Result** tab.
 
 You can also check the file uploaded to `input-bucket` from the OCI web console
 
