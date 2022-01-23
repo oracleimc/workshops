@@ -1,69 +1,35 @@
-# Public Access using API Gateway
-The [API Gateway](https://www.oracle.com/cloud-native/api-gateway/) service enables you to publish APIs with private endpoints that are accessible from within your network, and which you can expose with public IP addresses if you want them to accept internet traffic. The endpoints support API validation, request and response transformation, CORS, authentication and authorization, and request limiting. 
+# Troubleshooting
+In the previous [exercise](../2-lab/README.md) we have uploaded file to the `input-bucket`, an event fired, invoking a function. Function parses the file, writes to ADB and finaly moves the file from `input-bucket` to `processed-bucket`.
 
-If you are working on your own tenancy, please review [Required IAM Service Policy](https://docs.oracle.com/en-us/iaas/Content/APIGateway/Concepts/apigatewayoverview.htm#requiredpolicy)
+As you have checked so far, the last step does not happen. The file still remains on the `input-bucket` and nothing written on the `processed-bucket`. So the function is partially working. Let's see what is wrong
 
-API Gateway will make an internal request to the Functions endpoint, invoking the function. In this exercise, we will not put any authentication for requests. This method is fastest way of exposing functions to the public internet, also a recommended way for exposing functions to web applications.
+## Step 1: Enable Logs
+1. Go to the `etl-app` under **Functions**.
+2. **Resources** on the left side, click to **Logs**
+3. For the invoke category, enable logs
+    ![](./images/enable-logs1.png)  
+4. Leave the values as is and click to **Enable Log**
+    ![](./images/enable-logs2.png)  
 
-## Step 1: Update VCN for public access
-We are going to deploy the API Gateway in the same VCN with our Applications/Functions. That network is not accessible from external requests on HTTPS port.
 
-1. From the OCI Services menu, click **Virtual Cloud Networks** under **Networking**. Select the compartment assigned to you from the drop down menu on the left side of the screen(you may need to scroll down to see the dropdown)
-2. Select the VCN that you have created earlier
-    ![](./images/select-vcn.png)  
-3. Click to **Security Lists** on the left than open the **Default Security List for ...**
-    ![](./images/open-securityList.png)  
-4. Click to add Ingress Rules
-    ![](./images/open-IngressRules.png)  
-5. In the dialog enter the following and click to **Add Ingress Rules**
-    - Source: `0.0.0.0/0`
-    - Destination Port Range: `443`
-    - Description: `HTTPS`  
-    ![](./images/add-IngressRule.png)  
-
-## Step 2: Create API Gateway and add deployment
-1. From the OCI services menu click **API Gateway** under **Developer Services**, press to **Create Gateway**
-    ![](./images/gateways.png)  
-2. Fill the form as following and press **Create**
-    - Name: `fnGateway` (or something you like)
-    - Type: `Public`
-    - Compartment: *same as your functions [or leave it as is]*
-    - Virtual Cloud Network: *same virtual network that you have just modified*
-    - Subnet: `Public Subnet`  
-    ![](./images/create-gateway.png)  
-    This will take a little while. You can freely dismiss any pop-up notification about gateways
-3. When the status becomes active, click to the name of it `fnGateway`
-4. On the left side, select **Deployments** than press **Create Deployment**
-    ![](./images/deployments.png)  
-5. Create deployment with the following information:
-    1. **Basic Information**
-        - From Scratch
-        - Name: `Functions`
-        - Path Prefix: `/v1`
-        - Compartment: *same as your functions [or leave it as is]*
-        - Press **Next**
-        ![](./images/create-deployment-1.png)  
-    2. **Routes**
-        - Path: `/hello`
-        - Methods, add two: `GET` and `POST`
-        - Type: `Oracle Functions`
-        - Application: `WorkshopFunctionApplication` *the application name that you have created in exercise 1*
-        - Function Name: `my-func` *the function name that you have created in exercise 1*
-        - Press **Next**
-        ![](./images/create-deployment-2.png)  
-    3. **Review**
-        - Press **Create**. It will take some time creating the deployment
-6. When the deployment status becomes active, copy the **Endpoint**
-    ![](./images/deployment-url.png)  
-    You will use this url in item 7 and 8
-7. Open a new browser tab, paste that URL, append `/hello` *, otherwise you will get 404 error*
-    ![](./images/get-request.png)  
-8. In the terminal execute the following command, by replacing the url. Do not forget the add `/hello` to the end of the `URL`
+## Step 2: Invoke function and check logs
+1. Execute following command from terminal
     ```shell
-    $ curl -X POST -H "Content-Type: application/json" -d '{"name": "John"}' [URL]
-
-    > {"message":"Hello John"}
+    $ oci os object put  --bucket-name input-bucket --file file2.csv
     ```
-    ![](./images/post-request.png)  
+    Replace `input-bucket` name accordingly
+    
+    This will upload second file to the bucket and event automatically will pick it up. This time, since logs are enabled, function will log *COUT* and *CERR* streams
+2. Click on the name of the log
+    ![](./images/open-logs.png)  
+3. This will display the most recent log on top. If you have invoked function earlier, change the filter duration accordingly
+    ![](./images/filter-logs.png)  
+4. Look through the logs, you will find a log with **ERROR** keyword in it. Locate that row and expand that log record
+    ![](./images/expand-error.png)  
+5. **message** value holds the necessary information to give us insight about the cause. The message body is long and that frame can be scrolled to left-right
+    ![](./images/read-error-message.png)  
+6. As you dig thurgh, you will notice following words `InsufficientServicePermissions` and `Permissions granted to the object storage service principal "objectstorage-eu-frankfurt-1" to this bucket are insufficient`
+    The `objectstorage-eu-frankfurt-1` could be different in your case if you are on a different region
 
-
+## Step 3: The fix
+Think about what is missing or wrong? You can check the code, check the steps done in previous exercise. To reveal the fix, click to [THE FIX](./fix.md)
