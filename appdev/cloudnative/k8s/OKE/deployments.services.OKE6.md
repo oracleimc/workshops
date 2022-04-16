@@ -11,39 +11,24 @@ Now we now ready to deploy our backend container people-service to our kubernete
 + Build Image and Push to Registry
 + Deploy to Kubernetes 
 
-## Build Springboot Application ##
-
-This is quite a simple application. It just a java application that expose rest endpoint.
-
-To build this application will are going to use gradle.
-
-```
-cd oracle_projects/people-service
-
-./gradlew clean build
-```
-
-Output:
-
-```
-BUILD SUCCESSFUL in 3m 54s
-4 actionable tasks: 3 executed, 1 up-to-date
-```
-This action will create a jar file *people-service-0.1.0.jar* in the build folder. Something like *build/libs/people-service-0.1.0.jar*
-
-This location is quite important as will are going to use this to copy the jar file into the image during the docker image build.
-
 ## Build Image and Push to Registry ##
 Even before we build our image, let first have a look at our image file, more commonly know as a docker file. *Dockerfile* is a text document that contains all the commands a user could call on the command line to assemble an image.
 
 In our case we have defined a Dockerfile at the root of the project. Below is the file
 
 ```
-FROM openjdk:8-jdk-alpine
+FROM openjdk:8-jdk-alpine AS builder
+WORKDIR /build
+COPY . /build
+RUN apk add --no-cache bash
+RUN chmod +x gradlew
+RUN ./gradlew clean build
+
+FROM openjdk:8-jdk-alpine AS runner
 VOLUME /tmp
 EXPOSE 8080
 ARG JAR_FILE=build/libs/people-service-0.1.0.jar
-COPY ${JAR_FILE} app.jar
+COPY --from=builder /build/build/libs/people-service-0.1.0.jar /app.jar
 ENTRYPOINT ["java","-jar","/app.jar"]
 
 ```
@@ -83,28 +68,88 @@ docker build -t fra.ocir.io/<Object Storage Namespace>/<yourName>/people-rest-se
 Output:
 
 ```
-Sending build context to Docker daemon  39.37MB
-Step 1/6 : FROM openjdk:8-jdk-alpine
- ---> 54ae553cb104
-Step 2/6 : VOLUME /tmp
+Step 1/12 : FROM openjdk:8-jdk-alpine AS builder
+ ---> a3562aa0b991
+Step 2/12 : WORKDIR /build
  ---> Using cache
- ---> 1d58d13c4df1
-Step 3/6 : EXPOSE 8080
- ---> Running in 35ce36445944
-Removing intermediate container 35ce36445944
- ---> 2fccc524378d
-Step 4/6 : ARG JAR_FILE=build/libs/people-service-0.1.0.jar
- ---> Running in 20b14cecb3e9
-Removing intermediate container 20b14cecb3e9
- ---> d4e40145e594
-Step 5/6 : COPY ${JAR_FILE} app.jar
- ---> aa9eb6047949
-Step 6/6 : ENTRYPOINT ["java","-jar","/app.jar"]
- ---> Running in 0d7fb953b60e
-Removing intermediate container 0d7fb953b60e
- ---> 909821496d6d
-Successfully built 909821496d6d
-Successfully tagged fra.ocir.io/<Object Storage Namespace>/<yourName>/people-rest-service:1.0
+ ---> cdc3eb2aca0f
+Step 3/12 : COPY . /build
+ ---> 4262deffe541
+Step 4/12 : RUN apk add --no-cache bash
+ ---> Running in 676f4da54364
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.9/main/x86_64/APKINDEX.tar.gz
+fetch http://dl-cdn.alpinelinux.org/alpine/v3.9/community/x86_64/APKINDEX.tar.gz
+(1/5) Installing ncurses-terminfo-base (6.1_p20190105-r0)
+(2/5) Installing ncurses-terminfo (6.1_p20190105-r0)
+(3/5) Installing ncurses-libs (6.1_p20190105-r0)
+(4/5) Installing readline (7.0.003-r1)
+(5/5) Installing bash (4.4.19-r1)
+Executing bash-4.4.19-r1.post-install
+Executing busybox-1.29.3-r10.trigger
+OK: 112 MiB in 59 packages
+Removing intermediate container 676f4da54364
+ ---> 783fcfd63044
+Step 5/12 : RUN chmod +x gradlew
+ ---> Running in de2ea9b3a765
+Removing intermediate container de2ea9b3a765
+ ---> a428d9c4b14e
+Step 6/12 : RUN ./gradlew clean build
+ ---> Running in 66998b5f788e
+Downloading https://services.gradle.org/distributions/gradle-5.6.4-bin.zip
+.........................................................................................
+
+Welcome to Gradle 5.6.4!
+
+Here are the highlights of this release:
+ - Incremental Groovy compilation
+ - Groovy compile avoidance
+ - Test fixtures for Java projects
+ - Manage plugin versions via settings script
+
+For more details see https://docs.gradle.org/5.6.4/release-notes.html
+
+Starting a Gradle Daemon (subsequent builds will be faster)
+> Task :clean UP-TO-DATE
+
+> Task :compileJava
+Note: /build/src/main/java/hello/Application.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+
+> Task :processResources
+> Task :classes
+> Task :bootJar
+> Task :jar SKIPPED
+> Task :assemble
+> Task :compileTestJava NO-SOURCE
+> Task :processTestResources NO-SOURCE
+> Task :testClasses UP-TO-DATE
+> Task :test NO-SOURCE
+> Task :check UP-TO-DATE
+> Task :build
+
+BUILD SUCCESSFUL in 20s
+4 actionable tasks: 3 executed, 1 up-to-date
+Removing intermediate container 66998b5f788e
+ ---> 091bed375842
+Step 7/12 : FROM openjdk:8-jdk-alpine AS runner
+ ---> a3562aa0b991
+Step 8/12 : VOLUME /tmp
+ ---> Using cache
+ ---> deb61a7ad551
+Step 9/12 : EXPOSE 8080
+ ---> Using cache
+ ---> 0e8dddcd95b0
+Step 10/12 : ARG JAR_FILE=build/libs/people-service-0.1.0.jar
+ ---> Using cache
+ ---> 9267f2ff8bb3
+Step 11/12 : COPY --from=builder /build/build/libs/people-service-0.1.0.jar /app.jar
+ ---> 000f26433b5c
+Step 12/12 : ENTRYPOINT ["java","-jar","/app.jar"]
+ ---> Running in 425553ac883b
+Removing intermediate container 425553ac883b
+ ---> 42e869454069
+Successfully built 42e869454069
+Successfully tagged fra.ocir.io/emeaccoe/oracleimc/people-rest-service:1.0
 ```
 
 We are using '-t' to tell the build to tag the image during the build.
