@@ -65,7 +65,7 @@ So how do we do this? We need to tag our image in a special format. Here is the 
 **For Shared env, Please replace the repo-name with your own name. Instead of oracleimc, maybe allenkubai**
 
 ```
-fra.ocir.io/emeaccoe/oracleimc/people-rest-service:1.0
+fra.ocir.io/<Object Storage Namespace>/<yourName>/people-rest-service:1.0
 ```
 
 + {region-key} -  is the key for the Oracle Cloud Infrastructure Registry region you're using. For example, fra. See the [Availability by Region](https://docs.cloud.oracle.com/iaas/Content/Registry/Concepts/registryprerequisites.htm#Availab) topic in the Oracle Cloud Infrastructure Registry documentation.
@@ -77,7 +77,7 @@ fra.ocir.io/emeaccoe/oracleimc/people-rest-service:1.0
 Now that we have that out of the way and we have constructed our tag, it's now time to build our image. To build and tag the image you can use the following command: **Note the space and . at the end**
 
 ```
-docker build -t fra.ocir.io/emeaccoe/oracleimc/people-rest-service:1.0 . 
+docker build -t fra.ocir.io/<Object Storage Namespace>/<yourName>/people-rest-service:1.0 . 
 ```
 
 Output:
@@ -104,7 +104,7 @@ Step 6/6 : ENTRYPOINT ["java","-jar","/app.jar"]
 Removing intermediate container 0d7fb953b60e
  ---> 909821496d6d
 Successfully built 909821496d6d
-Successfully tagged fra.ocir.io/emeaccoe/oracleimc/people-rest-service:1.0
+Successfully tagged fra.ocir.io/<Object Storage Namespace>/<yourName>/people-rest-service:1.0
 ```
 
 We are using '-t' to tell the build to tag the image during the build.
@@ -119,19 +119,19 @@ Output:
 
 ```
 REPOSITORY                                              TAG                 IMAGE ID            CREATED             SIZE
-fra.ocir.io/emeaccoe/oracleimc/people-rest-service      1.0                 909821496d6d        56 seconds ago      134MB
+fra.ocir.io/<Object Storage Namespace>/<yourName>/people-rest-service      1.0                 909821496d6d        56 seconds ago      134MB
 ```
 
 Confirm that the tagging is fine. Next we can now push our image to our OCIR using the command *docker push {tagname}*
 
 ``` 
-docker push fra.ocir.io/emeaccoe/oracleimc/people-rest-service:1.0
+docker push fra.ocir.io/<Object Storage Namespace>/<yourName>/people-rest-service:1.0
 ```
 
 Output:
 
 ```
-The push refers to repository [fra.ocir.io/emeaccoe/oracleimc/people-rest-service]
+The push refers to repository [fra.ocir.io/<Object Storage Namespace>/<yourName>/people-rest-service]
 0608bcf688c3: Pushed 
 f2ec1bba02a6: Pushed 
 0c3170905795: Pushed 
@@ -159,7 +159,7 @@ Therefore we need to update this on the deployment file.
 For example:
 
 ```
-fra.ocir.io/emeaccoe/oracleimc/people-rest-service:1.0
+fra.ocir.io/<Object Storage Namespace>/<yourName>/people-rest-service:1.0
 ```
 
 Once this is done, you are now ready to start deployment.

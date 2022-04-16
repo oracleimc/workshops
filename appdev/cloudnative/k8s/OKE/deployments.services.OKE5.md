@@ -15,9 +15,9 @@ In this lab, we are going to setup the Oracle Cloud Infrastructure Registry (OCI
 In a terminal window on the client machine running Docker, log in to Oracle Cloud Infrastructure Registry by entering:
 
 ```
-docker login {region-key}.ocir.io
+docker login <Object Storage Namespace>.ocir.io
 ```
-where {region-key} is the key for the Oracle Cloud Infrastructure Registry region you're using. For example, fra. See the [Availability by Region](https://docs.cloud.oracle.com/iaas/Content/Registry/Concepts/registryprerequisites.htm#Availab) topic in the Oracle Cloud Infrastructure Registry documentation.
+where &lt;Object Storage Namespace&gt; is the key for the Oracle Cloud Infrastructure Registry region you're using. For example, fra. See the [Availability by Region](https://docs.cloud.oracle.com/iaas/Content/Registry/Concepts/registryprerequisites.htm#Availab) topic in the Oracle Cloud Infrastructure Registry documentation.
 
 When prompted, enter your username in the format {tenancy-namespace}/{username}, where {tenancy-namespace} is the auto-generated Object Storage namespace string of your tenancy (as shown on the Tenancy Information page). For example, ansh81vru1zp/jdoe@acme.com. If your tenancy is federated with Oracle Identity Cloud Service, use the format {tenancy-namespace}/oracleidentitycloudservice/{username}
 

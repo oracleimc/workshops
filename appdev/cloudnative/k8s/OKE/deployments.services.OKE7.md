@@ -11,6 +11,19 @@ Now we now ready to deploy our Frontend container people-web-app to our kubernet
 + Build Image and Push to Registry
 + Deploy to Kubernetes 
 
+If you are in previous project go to top base folder
+```sh
+cd ..
+```
+If you are not go to the base folder
+```sh
+cd oracle_projects
+```
+Clone the web app
+```sh
+git clone <url>
+```
+
 ## Build ReactJS Application ##
 
 This is quite a simple application. It just a ReactJS application that consumes a rest endpoint.
@@ -84,7 +97,7 @@ So how do we do this? We need to tag our image in a special format. Here is the 
 **For Shared env, Please replace the repo-name with your own name. Instead of oracleimc, maybe allenkubai**
 
 ```
-fra.ocir.io/emeaccoe/oracleimc/people-web-app:1.0
+fra.ocir.io/<Object Storage Namespace>/<yourName>/people-web-app:1.0
 ```
 
 + {region-key} -  is the key for the Oracle Cloud Infrastructure Registry region you're using. For example, fra. See the [Availability by Region](https://docs.cloud.oracle.com/iaas/Content/Registry/Concepts/registryprerequisites.htm#Availab) topic in the Oracle Cloud Infrastructure Registry documentation.
@@ -96,7 +109,7 @@ fra.ocir.io/emeaccoe/oracleimc/people-web-app:1.0
 Now that we have that out of the way and we have constructed our tag, it's now time to build our image. To build and tag the image you can use the following command: **Note the space and . at the end**
 
 ```
-docker build -t fra.ocir.io/emeaccoe/oracleimc/people-web-app:1.0 . 
+docker build -t fra.ocir.io/<Object Storage Namespace>/<yourName>/people-web-app:1.0 . 
 ```
 
 Output:
@@ -121,7 +134,7 @@ Step 6/6 : CMD serve -s build
 Removing intermediate container 18c5b90419aa
  ---> 3baa998c2f19
 Successfully built 3baa998c2f19
-Successfully tagged fra.ocir.io/emeaccoe/oracleimc/people-web-app:1.0
+Successfully tagged fra.ocir.io/<Object Storage Namespace>/<yourName>/people-web-app:1.0
 ```
 
 We are using '-t' to tell the build to tag the image during the build.
@@ -136,20 +149,20 @@ Output:
 
 ```
 REPOSITORY                                              TAG                 IMAGE ID            CREATED             SIZE
-fra.ocir.io/emeaccoe/oracleimc/people-web-app           1.0                 3baa998c2f19        39 seconds ago      686MB
-fra.ocir.io/emeaccoe/oracleimc/people-rest-service      1.0                 909821496d6d        29 minutes ago      134MB
+fra.ocir.io/<Object Storage Namespace>/<yourName>/people-web-app           1.0                 3baa998c2f19        39 seconds ago      686MB
+fra.ocir.io/<Object Storage Namespace>/<yourName>/people-rest-service      1.0                 909821496d6d        29 minutes ago      134MB
 ```
 
 Confirm that the tagging is fine. Next we can now push our image to our OCIR using the command *docker push {tagname}*
 
 ``` 
-docker push fra.ocir.io/emeaccoe/oracleimc/people-web-app:1.0
+docker push fra.ocir.io/<Object Storage Namespace>/<yourName>/people-web-app:1.0
 ```
 
 Output:
 
 ```
-The push refers to repository [fra.ocir.io/emeaccoe/oracleimc/people-web-app]
+The push refers to repository [fra.ocir.io/<Object Storage Namespace>/<yourName>/people-web-app]
 6a2a349d621d: Pushed 
 694a4033f91c: Pushed 
 a1a7dd69eaf8: Pushed 
@@ -185,7 +198,7 @@ Therefore we need to update this on the deployment file.
 For example:
 
 ```
-fra.ocir.io/emeaccoe/oracleimc/people-web-app:1.0
+fra.ocir.io/<Object Storage Namespace>/<yourName>/people-web-app:1.0
 ```
 
 Once this is done, you are now ready to start deployment.

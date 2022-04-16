@@ -197,8 +197,7 @@ You can now use the oke-admin service account to view and control the cluster, a
 + Now lets obtain an authentication token for the oke-admin account:
 
 ```
-kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep oke-admin |
-awk '{print $1}')
+kubectl -n kube-system describe secret $(kubectl -n kube-system get secret | grep oke-admin | awk '{print $1}')
 ```
 
 The output from the above command includes an authentication token (a long alphanumeric string) as the value of the token: element, as shown below:

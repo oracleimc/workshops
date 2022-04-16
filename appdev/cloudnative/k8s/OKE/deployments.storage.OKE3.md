@@ -70,15 +70,16 @@ mysqlclaim     Bound     ocid1.volume.**   50Gi       RWO            oci        
 
 3. Let's now store our mysql password as a secret in your kubernetes cluster. To do this:
 
-```
+```sh
 kubectl create secret generic mysql-pass --from-literal=password=123456
-
+```
+```
 secret/mysql-pass created
 ```
 
 4. Now that we have our password stored, it's now time to deploy our mysql server on to our cluster. This deployment file will create the mysql pod and the mysql service. To do this:
 
-```
+```sh
 kubectl create -f ./k8s/deployments/mysql-deployment.yaml 
 ```
 
