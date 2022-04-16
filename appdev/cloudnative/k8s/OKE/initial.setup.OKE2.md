@@ -136,8 +136,7 @@ NAME        STATUS    ROLES     AGE       VERSION
 6. Deploy the Kubernetes Dashboard on the new cluster you've created. In a terminal window, enter the following command
 
 ```
-$ kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.0.3/aio/deploy/recommended.yaml
-
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/dashboard/v2.5.0/aio/deploy/recommended.yaml
 ```
 
 output:
