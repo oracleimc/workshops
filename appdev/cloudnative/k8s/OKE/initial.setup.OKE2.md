@@ -159,14 +159,14 @@ deployment.apps/dashboard-metrics-scraper created
 ```
 7. Next, we can verify that we can use the Kubernetes Dashboard to connect to the cluster. We are going to create an administrator service account and a clusterrolebinding, both called oke-admin
 + Here is how the **oke-admin-service-account.yaml** file looks like: 
-```
+```yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: oke-admin
   namespace: kube-system
 ---
-apiVersion: rbac.authorization.k8s.io/v1beta1
+apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: oke-admin
@@ -175,15 +175,15 @@ roleRef:
   kind: ClusterRole
   name: cluster-admin
 subjects:
-  - kind: ServiceAccount
-    name: oke-admin
-    namespace: kube-system
+- kind: ServiceAccount
+  name: oke-admin
+  namespace: kube-system
 ```
 
 + To execute it and create the service account
 
 ```
-kubectl apply -f https://raw.githubusercontent.com/allenkubai/kubernetes/master/oracle/oke/dashboard/oke-admin-service-account.yaml
+kubectl apply -f https://raw.githubusercontent.com/oracleimc/workshops/master/appdev/cloudnative/k8s/oke-admin-service-account.yaml
 ```
 
 Output:
