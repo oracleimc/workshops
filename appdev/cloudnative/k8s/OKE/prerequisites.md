@@ -11,7 +11,7 @@
         * For [Linux/Mac](https://docs.docker.com/engine/install/)
     6.  Several programs can be installed easly via third party package manager. On Linux/Mac you can use brew, on Windows you can use Chocolatery
         * [Chocolatery](https://chocolatey.org/) (Windows)
-            * Kubernetes cli (kubectl). If you have Docker (desktop) installed this is bundled, no need to install.
+            * Kubernetes cli (kubectl). If you have Docker (desktop) installed this is bundled, no need to install. Run command line or powershell with administrator rights and execute the following:
                 ```sh
                 choco install kubernetes-cli
                 ```
