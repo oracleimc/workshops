@@ -28,7 +28,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/cont
 
 For more information on how to create an Ingress controller on OKE go [here](https://docs.cloud.oracle.com/en-us/iaas/Content/ContEng/Tasks/contengsettingupingresscontroller.htm) 
 
-2. Check if the your ingress-nginx is up check the running services, using the command:
+3. Check if the your ingress-nginx is up check the running services, using the command:
 
 ```
 kubectl get svc -n ingress-nginx
@@ -46,7 +46,7 @@ ingress-nginx-controller-admission   ClusterIP      10.96.86.9      <none>      
 
 **Copy the IP and place somewhere for later use**
 
-3. Now check if you can see you load balancer on your OCI console.
+4. Now check if you can see you load balancer on your OCI console.
 
 ![](./images/kube-ingress-2.png)
 
