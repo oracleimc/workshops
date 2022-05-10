@@ -14,8 +14,8 @@ helm version
 
 Expected output:
 
-```sh
-version.BuildInfo{Version:"v3.3.0", GitCommit:"8a4aeec08d67a7b84472007529e8097ec3742105", GitTreeState:"dirty", GoVersion:"go1.14.7"}
+```
+version.BuildInfo{Version:"v3.8.1", GitCommit:"5cb9af4b1b271d11d7a97a71df3ac337dd94ad37", GitTreeState:"clean", GoVersion:"go1.17.5"}
 ```
 
 
@@ -26,7 +26,7 @@ If you check the version again, they should be the same now.
 ```sh
 mkdir oracle_projects
 cd oracle_projects
-git clone https://github.com/allenkubai/kubernetes.git
+git clone https://github.com/oracleimc/kubernetes.git
 ```
 
 Once you have cloned the project, change into the project directory:
@@ -34,7 +34,7 @@ Once you have cloned the project, change into the project directory:
 ```sh
 cd kubernetes
 ```
-4. The next step before we install Jenkins, we need to create a persistance storage volume for jenkins in the kubernetes cluster. This is where jenkins will store it's data. To do this, use the deployment file already provided for you in this project: [https://github.com/allenkubai/kubernetes/blob/master/oracle/oke/helm/jenkins/jenkins-volume-claim.yaml](https://github.com/allenkubai/kubernetes/blob/master/oracle/oke/helm/jenkins/jenkins-volume-claim.yaml)
+4. The next step before we install Jenkins, we need to create a persistance storage volume for jenkins in the kubernetes cluster. This is where jenkins will store it's data. To do this, use the deployment file already provided for you in this project: [https://github.com/oracleimc/kubernetes/blob/master/oracle/oke/helm/jenkins/jenkins-volume-claim.yaml](https://github.com/oracleimc/kubernetes/blob/master/oracle/oke/helm/jenkins/jenkins-volume-claim.yaml)
 
 To use this deployment file to create a volume claim execute the following command:
 
@@ -56,41 +56,53 @@ Output:
 NAME           STATUS    VOLUME    CAPACITY   ACCESS MODES   STORAGECLASS   AGE
 jenkinsclaim   Bound     ocid1.**   100Gi      RWO            oci            66s
 ```
-5. We can install Jenkins now using a helm chart. To do this, we will install jenkins with a values descriptor file, which define which plugins and their version to installs. You can have a look at it here [https://github.com/allenkubai/kubernetes/blob/master/oracle/oke/helm/jenkins/values.yaml](https://github.com/allenkubai/kubernetes/blob/master/oracle/oke/helm/jenkins/values.yaml).
+
+> :warning: If you do not get status as **Bound**, you might be on a different region. In that case update the yaml file with matching cluster region. If you have applied the file, delete the pvc first and reapply with the updated file.
+
+
+5. We can install Jenkins now using a helm chart. To do this, we will install jenkins with a values descriptor file, which define which plugins and their version to installs. You can have a look at it here [https://github.com/oracleimc/kubernetes/blob/master/oracle/oke/helm/jenkins/values.yaml](https://github.com/oracleimc/kubernetes/blob/master/oracle/oke/helm/jenkins/values.yaml).
 
 execute the following command:
 
 ```sh
-helm install cd-jenkins stable/jenkins -f ./oracle/oke/helm/jenkins/values.yaml --wait
-```
-
-If you do not see the success message, instead seeing an error like
-```sh
-Error: failed to download "stable/jenkins" (hint: running `helm repo update` may help)
-```
-Please run the following commands and retry. This will update your helm repository
-```sh
-helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+helm repo add jenkins https://charts.jenkins.io
 helm repo update
+helm install cd-jenkins jenkins/jenkins -f ./oracle/oke/helm/jenkins/values.yaml --wait
 ```
 
 Once it's done installing you will see the output below with instructions on how to get jenkins admin password and to get access to jenkin via port forwarding _(if yours is different, use the one in your output)_:
 
 ```sh
-cd-jenkins-84695c79d8-r4vmh  1/1    Running  0         2m
-
+NAME: cd-jenkins
+LAST DEPLOYED: Mon May  9 21:18:38 2022
+NAMESPACE: default
+STATUS: deployed
+REVISION: 1
+NOTES:
 1. Get your 'admin' user password by running:
-  printf $(kubectl get secret --namespace default cd-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
+  kubectl exec --namespace default -it svc/cd-jenkins -c jenkins -- /bin/cat /run/secrets/chart-admin-password && echo
 2. Get the Jenkins URL to visit by running these commands in the same shell:
-  export JENKINS_POD=$(kubectl get pods --namespace default -l "component=cd-jenkins-master" -o jsonpath="{.items[0].metadata.name}")
   echo http://127.0.0.1:8080
-  kubectl port-forward $ JENKINS_POD 8080:8080
+  kubectl --namespace default port-forward svc/cd-jenkins 8080:8080
+
+3. Login with the password from step 1 and the username: admin
+4. Configure security realm and authorization strategy
+5. Use Jenkins Configuration as Code by specifying configScripts in your values.yaml file, see documentation: http:///configuration-as-code and examples: https://github.com/jenkinsci/configuration-as-code-plugin/tree/master/demos
+
+For more information on running Jenkins on Kubernetes, visit:
+https://cloud.google.com/solutions/jenkins-on-container-engine
+
+For more information about Jenkins Configuration as Code, visit:
+https://jenkins.io/projects/jcasc/
+
+
+NOTE: Consider using a custom image with pre-installed plugins
 ```
 
 Let's execute the first command to get our admin password:
 
 ```sh
-printf $(kubectl get secret --namespace default cd-jenkins -o jsonpath="{.data.jenkins-admin-password}" | base64 --decode);echo
+kubectl exec --namespace default -it svc/cd-jenkins -c jenkins -- /bin/cat /run/secrets/chart-admin-password && echo
 
 ZYV1o****
 ```
@@ -100,22 +112,16 @@ Now you have our password **ZYV1o****** copy it somewhere:
 Next let setup our port forwarding for us to get access to Jenkin interface
 
 ```sh
-export JENKINS_POD=$(kubectl get pods --namespace default -l "component=cd-jenkins-master" -o jsonpath="{.items[0].metadata.name}")
-
-kubectl port-forward $JENKINS_POD 8080:8080
+kubectl --namespace default port-forward svc/cd-jenkins 8080:8080
 ```
 **Please note that you can change the local port if you have something else running on port 8080 on you local machine**
 
 **Running the `kubectl port-forward` command will keep your terminal busy. Pressing to Ctrl + C will terminate port forwarding**
 
 
-Now you can got your browser and enter [http://localhost:8080/](http://localhost:8080/)
+Now you can got your browser and enter [http://127.0.0.1:8080](127.0.0.1:8080)
 
-Here is the Jenkins login page:
-
-![](./images/jenkins_login.png)
-
-Here is the initial dashboard once you login. 
+Here is the Jenkins main page:
 
 ![](./images/jenkins_login_initial_dash.png)
 

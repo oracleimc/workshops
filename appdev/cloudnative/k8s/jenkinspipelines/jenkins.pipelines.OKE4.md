@@ -30,13 +30,18 @@ In this lab, you are going to configure the jenkins instance. At the end of the 
 
 5. Next, click on *Add Credentials* again. This time we are going to add **OCIR** credentials. Please input as shown below replace username and password with your own values: 
 
-**Note: Ask your instructor for your TENANCY NAMESPACE. If you are using your own tenancy, got to Adminstration > Tenancy Details and copy the Object Namespace**
+
+To get your object storage namespace, execute the following command:
+```sh
+oci os ns get
+```
 
 + Kind - **Username with password**
 + Username - **{namespace/username}**. *For me it's gse00013828 from my tenancy namespace and api.user for my user. Therefore username should be gse00013828/api.user.*
 + password - **Auth Token** *This was generated during the initial setup*
-ID - **ocir-credentials** *This ID is very important. You will need it in the of the Jenkinfile in later steps*
-+ Description - **ocir credentials** *You can write your own description*
+ID
++ **ocir-credentials** *This ID is very important. You will need it in the of the Jenkinfile in later steps*
++ Description - **OCIR credentials** *You can write your own description*
 
 ![](./images/jenkins-adding-creds-ocir-config-1.png)
 
@@ -57,6 +62,8 @@ ID - **ocir-credentials** *This ID is very important. You will need it in the of
 ![](./images/jenkins-adding-creds-to-kube-plugin-4.png)
 
 10. On the configure page, scroll down to the *Kubernetes* plugin. Under credentials, select your *Secret Text* then click *Test Connection*. Once it succesfull, update the Jenkins URL and the Jenkins tunnel as show in the screenshot. Then, scroll to the bottom of the page and click *Save > Apply*
+    - Jenkins URL: http://cd-jenkins:8080
+    - Jenkins tunnel: cd-jenkins-agent:50000
 
 ![](./images/jenkins-adding-creds-to-kube-plugin-5.png)
 

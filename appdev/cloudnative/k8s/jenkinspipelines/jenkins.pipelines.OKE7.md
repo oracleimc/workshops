@@ -50,13 +50,13 @@ Before you can create your pipelines, you need to update the tenancy and ocir ur
 
 1. Open the JenkinFile. The file is located in the root directory of your project. 
 
-**Note: In the tenancy field use your TENANCY NAMESPACE**
+>:exclamation: In the tenancy field use your **TENANCY NAMESPACE**
 
 ![](./images/people-service-pipeline-00.png)
 
-**PLEASE NOTE:** 
-- That if the cluster in a different region other than eu-frankfurt then you will need to change the ocir url on line 4.
-- If you are using the shared tenancy for Workshop, change line 2, add your name
+>**PLEASE NOTE:** 
+> - That if the cluster in a different region other than eu-frankfurt then you will need to change the ocir url on line 4.
+> - If you are using the shared tenancy for Workshop, change line 2, add your name
  
 
 2. Commit and push this file to your git repository **before next step.** 
@@ -113,7 +113,7 @@ kubectl get pods
 Output:
 ```sh
 NAME                              READY     STATUS    RESTARTS   AGE
-cd-jenkins-7cdb6d66b4-l9z9d       1/1       Running   0          5h5m
+cd-jenkins-0                      2/2       Running   0          5h5m
 mysql-69cfc89647-fjk7c            1/1       Running   0          4h42m
 people-service-57f5f77574-wjdhg   1/1       Running   0          5m8s
 ```

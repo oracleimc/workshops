@@ -13,7 +13,7 @@ For you to effectively work on this workshop, you will need to set up a couple o
 
 + **oci cli** - *Oracle Cloud Infrastructure Command Line tool. You will need this for you to download the kubeconfig file that is required by kubectl for it to connect to your cluster.*
 
-+ **Github Access Token** - Jenkins will need this to access you github repositories.
++ **Github Access Token** - Jenkins will need this to access your github repositories.
 
 Once this tools are installed and configured, you will now be able to download the **kubeconfig** file and use it to connect to your cluster.
 
@@ -47,7 +47,7 @@ If you have existing OCI config, you should either delete existing or add this a
 
 1. Login to your OCI console
 2. Click on *'Burger Menu' on the top left > Scroll to Identity > Users*
-3. Select your user, in this my case 'api.user'. Click on *Copy* OCID as shown on the image below.
+3. Select **your** user, in this my case `api.user`. Click on *Copy* OCID as shown on the image below.
 ![](./images/oci-console-user-ocid-1.png)
 3. Copy the OCID into a file somewhere for reference later.
 
@@ -56,7 +56,7 @@ If you have existing OCI config, you should either delete existing or add this a
 Now that we have those three items, you are ready to install and configure oci cli.
 To install oci cli go [here](https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/cliinstall.htm?tocpath=Developer%20Tools%20%7CCommand%20Line%20Interface%20(CLI)%20%7C_____1). Once it's installed, use the *Use the Setup Dialog* to setup the configuration file by executing the command below. Follow the prompts and allow it to create the private and public API keys for you.
 
-```
+```sh
 oci setup config
 ```
 
@@ -64,7 +64,7 @@ For oci cli to work, you must upload your public key to the oci console under yo
 
 You will need copy the contents of your generated API public key. You can execute the command below:
 
-```
+```sh
 cat ~/.oci/oci_api_key_public.pem 
 ```
 
@@ -124,21 +124,30 @@ You are now ready to download your kubeconfig file.
 ![](./images/oci-console-cluster-2.png)
 
 4. Follow the instructions on the pop window. **Do not use the commands on the screenshot below. Use the ones on your pop up window**. It's just an example!
+    1. Select `Local Access`
+    2. On step 2, only use the `public endpoint` version of the command. <ins>Not the private endpoint!</ins>
 
 
 ![](./images/oci-console-cluster-3.png)
 
-5. You can now test if you can connect to you kubernets cluster:
-
+5. Change access level for the kubernetes config file:
+```sh
+chmod go-r ~/.kube/config
 ```
+
+6. You can now test if you can connect to you kubernets cluster:
+
+```sh
 kubectl get nodes
-
-
-NAME        STATUS    ROLES     AGE       VERSION
-10.0.10.2   Ready     node      1d        v1.12.7
-10.0.11.2   Ready     node      1d        v1.12.7
-10.0.12.2   Ready     node      1d        v1.12.7
 ```
+*Outputs:*
+```
+NAME        STATUS    ROLES     AGE       VERSION
+10.0.10.2   Ready     node      1d        v1.22.5
+10.0.11.2   Ready     node      1d        v1.22.5
+10.0.12.2   Ready     node      1d        v1.22.5
+```
+> :star: Name of the nodes are the internal IP values of those compute instances. The names and version could be different in your case.
 
 ## Github Access Token ##
 

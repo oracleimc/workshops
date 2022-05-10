@@ -32,7 +32,7 @@ cd people-service
 kubectl create -f ./k8s/claims/mysql-volume-claim.yaml 
 ```
 Output:
-```sh
+```
 persistentvolumeclaim/mysqlclaim created
 ```
 
@@ -43,8 +43,7 @@ kubectl get pvc
 ```
 
 Output:
-```sh
-
+```
 NAME           STATUS    VOLUME    CAPACITY   ACCESS MODES   STORAGECLASS   AGE
 jenkinsclaim   Bound     ocid1.volume.**   100Gi      RWO            oci            63m
 mysqlclaim     Bound     ocid1.volume.**   50Gi       RWO            oci            35s
@@ -56,18 +55,18 @@ mysqlclaim     Bound     ocid1.volume.**   50Gi       RWO            oci        
 kubectl create secret generic mysql-pass --from-literal=password=123456
 ```
 Output:
-```sh
+```
 secret/mysql-pass created
 ```
 
 4. Now that we have our password stored, it's now time to deploy our mysql server on to our cluster. This deployment file will create the mysql pod and the mysql service. To do this:
 
 ```sh
-kubectl create -f ./k8s/deployments/mysql-deployment.yaml 
+kubectl apply -f ./k8s/deployments/mysql-deployment.yaml 
 ```
 
 Output:
-```sh
+```
 deployment.extensions/mysql created
 service/mysql created
 ```
@@ -79,10 +78,10 @@ kubectl get pods
 ```
 
 Output:
-```sh
-NAME                          READY     STATUS    RESTARTS   AGE
-cd-jenkins-74bbddd846-7k594   1/1       Running   0          140m
-mysql-69cfc89647-p42k7        1/1       Running   0          47s
+```
+NAME                     READY   STATUS    RESTARTS   AGE
+cd-jenkins-0             2/2     Running   0          53m
+mysql-5dbf965c69-g6xsp   1/1     Running   0          71s
 ```
 
 You can check if the mysql service is running:
@@ -91,24 +90,23 @@ You can check if the mysql service is running:
 kubectl get svc
 ```
 Output:
-```sh
+```
 NAME               TYPE        CLUSTER-IP      EXTERNAL-IP   PORT(S)     AGE
-cd-jenkins         ClusterIP   10.96.186.250   <none>        8080/TCP    140m
-cd-jenkins-agent   ClusterIP   10.96.223.114   <none>        50000/TCP   140m
-kubernetes         ClusterIP   10.96.0.1       <none>        443/TCP     180m
-mysql              ClusterIP   10.96.136.57    <none>        3306/TCP    1m
+cd-jenkins         ClusterIP   10.96.125.44    <none>        8080/TCP    53m
+cd-jenkins-agent   ClusterIP   10.96.144.65    <none>        50000/TCP   53m
+kubernetes         ClusterIP   10.96.0.1       <none>        443/TCP     3h58m
+mysql              ClusterIP   10.96.170.123   <none>        3306/TCP    94s
 ```
 
-5. Let now create the **people_db** that is used by the backend api to store data. You will need to connect to the mysql docker container that is running (wait until status in `kubectl get pods` becomes `Running`) in your cluster and then login to the mysql server and create your database. To connect you will need the name of the pod, in my case **mysql-69cfc89647-p42k7** and use the kubectl exec command as shown below. mysql password is **123456**
+5. Let now create the **people_db** that is used by the backend api to store data. You will need to connect to the mysql docker container that is running (wait until status in `kubectl get pods` becomes `Running`) in your cluster and then login to the mysql server and create your database. To connect you will need the name of the pod, in my case **mysql-5dbf965c69-g6xsp** and use the kubectl exec command as shown below. mysql password is **123456**
 
 If you are using `git bash` on Windows, this might not work; use powershell instead
 ```sh
-kubectl exec -it mysql-69cfc89647-p42k7 -- /bin/bash
+kubectl exec -it mysql-5dbf965c69-g6xsp -- /bin/bash
 ```
 Then:
 ```sh
-
-root@mysql-69cfc89647-p42k7:/# mysql -u root -p
+root@mysql-5dbf965c69-g6xsp:/# mysql -u root -p
 Enter password: 
 
 mysql> create database people_db;

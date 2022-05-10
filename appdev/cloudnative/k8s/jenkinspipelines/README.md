@@ -21,8 +21,8 @@ Please review [prerequisites](./prerequisites.md) in detail
 
 ### GitHub imports
 
-+ Fork https://github.com/allenkubai/people-service.git into your github account. Use the same name
-+ Fork https://github.com/allenkubai/people-web-app.git into your github account. Use the same name
++ Fork https://github.com/oracleimc/people-service.git into your github account. Use the same name
++ Fork https://github.com/oracleimc/people-web-app.git into your github account. Use the same name
 
 Fork button is on top left on each repository. _You do not require to fork this repository_
 ![](./images/github-fork1.png)
