@@ -1,20 +1,5 @@
 # Lab5: Ingress Controller
-In this lab we will:
-- Cluster role binding
-- Create Ingress Controller
-
-## Cluster Role Binding
-The first thing you need to do is create a cluster role binding using the user used to create the cluster. Use the command below. Do not forget to replace the --user= with your OCID
-
-The first thing you need to do is create a cluster role binding. Use the command below. **Do not forget to replace the --user= with your OCID**
-
-```sh
-kubectl create clusterrolebinding cluster-admin-binding-$YOUR_NAME --clusterrole=cluster-admin --user=ocid1.user.oc1..xxxxx
-```
-Output:
-```
-clusterrolebinding.rbac.authorization.k8s.io/cluster-admin-binding-yourname created
-```
+If you are not OCI admin and have not completed adding [RBAC cluster admin role](https://github.com/oracleimc/workshops/blob/master/appdev/cloudnative/k8s/OKE-VBS/Lab2-Configuration.md#kubernetess-cluster), go back and perform this action
 
 ## Create an Ingress Controller (Load Balancer) for the kubernetes cluster
 Here we will be creating the ingress controller. This setup is for multi-user scenario for workshop scope.
@@ -88,7 +73,15 @@ Go and check the [Load Balancer](https://cloud.oracle.com/load-balancer/load-bal
 
 ![Load Balancers](./images/5-load-balancers.png)
 
+---
+# Extra
+> This section is just for information purpose. Do not execute during the workshop
 
+For vanilla ingress-nginx installation, you can check:
+1. [Oracle Cloud Infrastructure](https://github.com/kubernetes/ingress-nginx/blob/main/docs/deploy/index.md#oracle-cloud-infrastructure) script deployment. Download the deployment file, perform necessary changes.
+2. [Quick start](https://github.com/kubernetes/ingress-nginx/blob/main/docs/deploy/index.md#quick-start), Helm deployment is also good. Helm charts are more easy to update the installed  version. Making customizations are are also possible, but require more digging.
+
+Both of them will provision the infrastructure load balancer. [Load balancer based customizations](https://github.com/oracle/oci-cloud-controller-manager/blob/master/docs/load-balancer-annotations.md) could be applied in both of the methods.
 
 ---
 # Navigation
