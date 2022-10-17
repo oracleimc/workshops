@@ -38,13 +38,7 @@ Unless stated otherwise, all of the config will happen within remote delveopment
     ```shell
     echo -e '\nexport KUBECONFIG=$HOME/.kube/config' >> ~/.bashrc
     ```
-
-2. Add rbac role
-    ```shell
-    kubectl create clusterrolebinding <my-cluster-admin-binding> --clusterrole=cluster-admin --user=<user_OCID>
-    ```
-    Give any name for my-cluster-admin-binding. User_ocid is obtained from OCI config file or OCI web console, user settings
-3. Create your name variable, all as single word and in lowercase
+2. Create your name variable, all as single word and in lowercase
     ```shell
     export YOUR_NAME="yourName"
     ```
@@ -52,6 +46,12 @@ Unless stated otherwise, all of the config will happen within remote delveopment
     ```shell
     echo -e '\nexport YOUR_NAME="yourName"' >> ~/.bashrc
     ```
+3. Add rbac role
+    ```shell
+    kubectl create clusterrolebinding "my-cluster-admin-$YOUR_NAME" --clusterrole=cluster-admin --user=<user_OCID>
+    ```
+    Give any name for my-cluster-admin-binding. User_ocid is obtained from OCI config file or OCI web console, user settings or from OCI config file (`~/.oci/config`)
+
 4. Create a namespace of your own. Give it your name, a short one without any spaces, all lower case:
     ```shell
     kubectl create namespace $YOUR_NAME
