@@ -8,7 +8,7 @@ In this lab we will make sure that we have the right enviornment for the worksho
 - kubectl
 - Helm
 
-## Linux - bash
+## Linux - bash
 The guides in this workshop are prepared for a linux bash system. Using other systems might not generate expected results. If you have a native bash or equvalent enviornment OR a local linux VM or container will work for you.
 
 If you do not have this enviornment, create a VM instance on OCI and connect this instance using SSH. If you do not know how to do it, ask it to your instructor. Also check [git](#git) & [ssh](#ssh) sections first.
