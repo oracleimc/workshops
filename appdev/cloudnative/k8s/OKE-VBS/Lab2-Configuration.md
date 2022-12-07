@@ -61,7 +61,7 @@ Unless stated otherwise, all of the config will happen within remote delveopment
     kubectl config set-context --current --namespace=$YOUR_NAME
     ```
 
-## VBS
+## VBS
 1. Open your VBS instance
 2. On top right, click to your user picture and click to preferences
 3. Under SSH keys, Add key. You will be repating this step 3 and 4, for both local and remote ssh keys.
